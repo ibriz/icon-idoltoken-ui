@@ -49,6 +49,9 @@ export const API_BASE =
     ? 'https://www.techastep.com/api/'
     : 'https://www.techastep.com/api/';
 
+
+export const CELEBS_API_BASE = 'https://celebritybucks.com/';
+
 // For file upload
 export const DOCUMENT_URL =
   process.env.NODE_ENV === 'production'

@@ -69,7 +69,7 @@ const App = props => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/user" component={UserDetailPage} />
-        <Route path="/icon/detail" component={IconDetailPage} />
+        <Route path="/icon/detail/:id" component={IconDetailPage} />
         <Route exact path="/icon" component={IconPage} />
         <GuestRoute
           exact

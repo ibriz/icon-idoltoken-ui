@@ -10,13 +10,13 @@ const selectDomain = (state) => state.get('iconPage');
  * Other specific selectors
  */
 const makeSelectSuccess = () => createSelector(selectDomain, (state) => state.get('success'));
-const makeSelectResponse = () => createSelector(selectDomain, (state) => state.get('response'));
+const makeSelectIconResponse = () => createSelector(selectDomain, (state) => state.get('iconResponse'));
 const makeSelectError = () => createSelector(selectDomain, (state) => state.get('error'));
-const makeSelectRequesting = () => createSelector(selectDomain, (state) => state.get('requesting'));
+const makeSelectIconRequesting = () => createSelector(selectDomain, (state) => state.get('iconRequesting'));
 
 export {
   makeSelectSuccess,
-  makeSelectResponse,
-  makeSelectRequesting,
+  makeSelectIconResponse,
+  makeSelectIconRequesting,
   makeSelectError,
 };

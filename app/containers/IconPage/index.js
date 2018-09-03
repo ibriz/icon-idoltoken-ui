@@ -13,19 +13,41 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-// import makeSelectIconPage from './selectors';
-import {
-  makeSelectRequesting, makeSelectError, makeSelectResponse, makeSelectSuccess
-} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import IconList from './IconList';
+import { Label, Icon } from 'semantic-ui-react';
+
+import {
+  makeSelectIconResponse, 
+  makeSelectError, 
+  makeSelectIconRequesting, 
+  makeSelectSuccess
+} from './selectors';
+
+import { 
+  goTo,
+  getIconListRequest,
+} from './actions';
+
 /* eslint-disable react/prefer-stateless-function */
 export class IconPage extends React.Component {
-  state = {};
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
+
+  componentWillMount(){
+    this.props.getIconList();
+  }
+
   render() {
     const {} = this.state;
-    const {} = this.props;
+    const {
+      isRequesting,
+      successIconResponse,
+    } = this.props;
     return (
       <div>
         <Helmet>
@@ -33,29 +55,38 @@ export class IconPage extends React.Component {
           <meta name="description" content="Description of IconPage" />
         </Helmet>
         <h1>
-          This is Icon Page
+          This is Icon List Page
         </h1>
+        {isRequesting &&
+          <Icon src={`../../assets/img/loader.svg`} />
+        }
+        {!isRequesting &&
+          <IconList resp={successIconResponse} goTo={this.goTo}/>
+        }
       </div>
     );
+  }
+  goTo = (id) =>{
+    this.props.goTo(id);
   }
 }
 
 IconPage.propTypes = {
-  isRequesting: PropTypes.bool.isRequired,
+  isIconRequesting: PropTypes.bool.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   errorResponse: PropTypes.string.isRequired,
-  successResponse: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  isRequesting: makeSelectRequesting(),
+  isIconRequesting: makeSelectIconRequesting(),
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
-  successResponse: makeSelectResponse(),
+  successIconResponse: makeSelectIconResponse(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  
+  getIconList : () => dispatch(getIconListRequest()),
+  goTo : (id) => dispatch(goTo(id))
 })
 
 const withConnect = connect(

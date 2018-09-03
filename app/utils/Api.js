@@ -1,5 +1,4 @@
 import { call, put } from 'redux-saga/effects';
-import { API_BASE } from 'containers/App/constants';
 import objectToFormData from './objectToFormData';
 import request from './request';
 // import { logoutSuccess } from 'containers/Login/actions';
@@ -19,8 +18,7 @@ class Api {
     ...actionArguments
   ) {
     return function* commonApiSetup() {
-      const baseUrl = API_BASE;
-      const requestURL = `${baseUrl}${apiUri}`;
+      const requestURL = `${apiUri}`;
       try {
         let options;
         if (data !== undefined) {
@@ -84,7 +82,7 @@ class Api {
     ...actionArguments
   ) {
     return function* multiPartApiSetup() {
-      const requestURL = `${API_BASE}${apiUri}`;
+      const requestURL = `${apiUri}`;
       let multipartData = new FormData();
       multipartData = objectToFormData(data, multipartData);
       if (Object.prototype.toString.call(document) === '[object Array]') {
@@ -134,7 +132,7 @@ class Api {
     };
   }
   static multipartDirectUpload(apiUri, data, document, token, metaData = '') {
-    const requestURL = `${API_BASE}${apiUri}`;
+    const requestURL = `${apiUri}`;
     let multipartData = new FormData();
     multipartData = objectToFormData(data, multipartData);
     if (Object.prototype.toString.call(document) === '[object Array]') {
@@ -226,7 +224,7 @@ class Api {
     ...actionArguments
   ) {
     return function* patchApiSetup() {
-      const requestURL = `${API_BASE}${apiUri}`;
+      const requestURL = `${apiUri}`;
       try {
         const options = {
           method: 'PATCH',
@@ -269,7 +267,7 @@ class Api {
      */
   static delete(apiUri, onSuccess, onError, token, ...actionArguments) {
     return function* deleteApiSetup() {
-      const requestURL = `${API_BASE}${apiUri}`;
+      const requestURL = `${apiUri}`;
       try {
         // Call our request helper (see 'utils/request')
         const options = {

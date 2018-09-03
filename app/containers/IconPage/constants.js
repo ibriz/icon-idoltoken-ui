@@ -4,9 +4,9 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/IconPage/DEFAULT_ACTION';
+export const GO_TO = 'app/IconPage/GO_TO';
 
-export const DEFAULT_ACTION_REQUEST = 'app/IconPage/DEFAULT_ACTION_REQUEST';
-export const DEFAULT_ACTION_SUCCESS = 'app/IconPage/DEFAULT_ACTION_SUCCESS';
-export const DEFAULT_ACTION_FAILURE = 'app/IconPage/DEFAULT_ACTION_FAILURE';
+export const GET_ICON_LIST_REQUEST = 'app/IconPage/GET_ICON_LIST_REQUEST';
+export const GET_ICON_LIST_SUCCESS = 'app/IconPage/GET_ICON_LIST_SUCCESS';
+export const GET_ICON_LIST_FAILURE = 'app/IconPage/GET_ICON_LIST_FAILURE';
 
