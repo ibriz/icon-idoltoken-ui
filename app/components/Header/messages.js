@@ -10,13 +10,17 @@ export default defineMessages({
     id: 'boilerplate.components.Header.home',
     defaultMessage: 'Home',
   },
-  features: {
-    id: 'boilerplate.components.Header.features',
-    defaultMessage: 'Features',
+  icons: {
+    id: 'boilerplate.components.Header.icons',
+    defaultMessage: 'Icons',
   },
-  example: {
-    id: 'boilerplate.components.Header.example',
-    defaultMessage: 'Example',
+  iconDetail: {
+    id: 'boilerplate.components.Header.iconDetail',
+    defaultMessage: 'Icon Detail',
+  },
+  userDetail: {
+    id: 'boilerplate.components.Header.userDetail',
+    defaultMessage: 'User Detail',
   },
   login: {
     id: 'boilerplate.components.Header.login',

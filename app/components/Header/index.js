@@ -17,15 +17,18 @@ class Header extends React.Component {
           <HeaderLink to="/">
             <FormattedMessage {...messages.home} />
           </HeaderLink>
-          <HeaderLink to="/features">
-            <FormattedMessage {...messages.features} />
+          <HeaderLink to="/icon">
+            <FormattedMessage {...messages.icons} />
           </HeaderLink>
-          <HeaderLink to="/example">
-            <FormattedMessage {...messages.example} />
+          <HeaderLink to="/icon/detail">
+            <FormattedMessage {...messages.iconDetail} />
           </HeaderLink>
-          <HeaderLink to="/login">
+          <HeaderLink to="/user">
+            <FormattedMessage {...messages.userDetail} />
+          </HeaderLink>
+          {/* <HeaderLink to="/login">
             <FormattedMessage {...messages.login} />
-          </HeaderLink>
+          </HeaderLink> */}
         </NavBar>
         <A href="https://bitsbeat.com">
           <Img src={BitsBeat} alt="bitsbeat-boilerplate - Logo" />

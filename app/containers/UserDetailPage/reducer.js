@@ -1,6 +1,6 @@
 /*
  *
- * {{ properCase name }} reducer
+ * UserDetailPage reducer
  *
  */
 
@@ -15,7 +15,7 @@ const initialState = fromJS({
   success: false
 });
 
-function {{ camelCase name }}Reducer(state = initialState, action = {type: ''}) {
+function userDetailPageReducer(state = initialState, action = {type: ''}) {
   switch (action.type) {
     case types.DEFAULT_ACTION:
       return state;
@@ -30,4 +30,4 @@ function {{ camelCase name }}Reducer(state = initialState, action = {type: ''}) 
   }
 }
 
-export default {{ camelCase name }}Reducer;
+export default userDetailPageReducer;

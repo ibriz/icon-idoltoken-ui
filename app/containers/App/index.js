@@ -18,16 +18,16 @@ import { createStructuredSelector } from 'reselect';
 import injectSaga from 'utils/injectSaga';
 import Toaster from 'components/Toaster';
 import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LoginPage from '../LoginPage/Loadable';
 import AdminDashboard from '../Dashboard/Admin';
-import ExamplePage from '../ExampleContainer/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import GuestRoute from 'components/Routes/GuestRoute';
 import UserRoute from 'components/Routes/UserRoute';
-
+import IconPage from 'containers/IconPage/Loadable';
+import IconDetailPage from 'containers/IconDetailPage/Loadable';
+import UserDetailPage from 'containers/UserDetailPage/Loadable';
 import {
   makeSelectDialog,
   makeSelectLocation,
@@ -68,8 +68,9 @@ const App = props => {
       {dialog && dialog.size > 0 && dialog.toJS()}
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
-        <Route path="/example" component={ExamplePage} />
+        <Route path="/user" component={UserDetailPage} />
+        <Route path="/icon/detail" component={IconDetailPage} />
+        <Route exact path="/icon" component={IconPage} />
         <GuestRoute
           exact
           location={location}
