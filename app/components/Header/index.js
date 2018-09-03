@@ -30,9 +30,6 @@ class Header extends React.Component {
             <FormattedMessage {...messages.login} />
           </HeaderLink> */}
         </NavBar>
-        <A href="https://bitsbeat.com">
-          <Img src={BitsBeat} alt="bitsbeat-boilerplate - Logo" />
-        </A>
       </div>
     );
   }

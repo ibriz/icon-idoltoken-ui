@@ -1,13 +1,22 @@
-/**
- * Homepage selectors
- */
 
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
 
-const selectHome = state => state.get('home', initialState);
+/**
+ * Direct selector to the homePage state domain
+ */
+const selectDomain = (state) => state.get('homePage');
 
-const makeSelectUsername = () =>
-  createSelector(selectHome, homeState => homeState.get('username'));
+/**
+ * Other specific selectors
+ */
+const makeSelectSuccess = () => createSelector(selectDomain, (state) => state.get('success'));
+const makeSelectResponse = () => createSelector(selectDomain, (state) => state.get('response'));
+const makeSelectError = () => createSelector(selectDomain, (state) => state.get('error'));
+const makeSelectRequesting = () => createSelector(selectDomain, (state) => state.get('requesting'));
 
-export { selectHome, makeSelectUsername };
+export {
+  makeSelectSuccess,
+  makeSelectResponse,
+  makeSelectRequesting,
+  makeSelectError,
+};

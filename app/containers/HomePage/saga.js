@@ -1,37 +1,38 @@
-/**
- * Gets the repositories of the user from Github
- */
+import { take, takeLatest, fork, call, put, select } from 'redux-saga/effects'; // Individual exports for testing export default function*
+// defaultSaga() { // See example in containers/HomePage/saga.js }
 
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_REPOS } from 'containers/App/constants';
-// import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { LOCATION_CHANGE, push} from "react-router-redux";
 
-import request from 'utils/request';
-// import { makeSelectUsername } from 'containers/HomePage/selectors';
+import Api from 'utils/Api';
+import {makeSelectToken} from 'containers/App/selectors';
 
-/**
- * Github repos request/response handler
- */
-export function* getRepos() {
-  // Select username from store
-  // const username = yield select(makeSelectUsername());
-  // const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-  // try {
-  //   // Call our request helper (see 'utils/request')
-  //   const repos = yield call(request, requestURL);
-  //   yield put(reposLoaded(repos, username));
-  // } catch (err) {
-  //   yield put(repoLoadingError(err));
-  // }
+import * as types from './constants';
+import * as actions from './actions';
+
+function* redirectOnSuccess() {
+    yield take(types.DEFAULT_ACTION);
+    //executed on successful action
+    yield put(push("/next-route"));
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
-export default function* githubData() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-  // By using `takeLatest` only the result of the latest API call is applied.
-  // It returns task descriptor (just like fork) so we can continue execution
-  // It will be cancelled automatically on component unmount
-  // yield takeLatest(LOAD_REPOS, getRepos);
+function* defaultActionService(action) {
+    const token = yield select(makeSelectToken());
+    const {payload} = action;
+    const successWatcher = yield fork(redirectOnSuccess);
+    yield fork(
+        Api.post(
+            `api/some-api-url`,
+            actions.defaultActionSuccess,
+            actions.defaultActionFailure,
+            {some: 'data'},
+            token
+        )
+    );
+    yield take([LOCATION_CHANGE, types.DEFAULT_ACTION_FAILURE]);
+    yield cancel(successWatcher);
+}
+
+// Individual exports for testing
+export default function* defaultSaga() {
+    yield takeLatest(types.DEFAULT_ACTION_REQUEST, defaultActionService);
 }
