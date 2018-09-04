@@ -24,6 +24,12 @@ const makeSelectError = () =>
   createSelector(selectGlobal, state => state.get('error'));
 const makeSelectResponse = () =>
   createSelector(selectGlobal, state => state.get('response'));
+
+const makeSelectCurrentAddress = () =>
+  createSelector(selectGlobal, state => state.get('currentAddress'));
+const makeSelectAddresses = () =>
+  createSelector(selectGlobal, state => state.get('addresses'));
+  
 export {
   makeSelectLocation,
   makeSelectIsAuthenticated,
@@ -33,4 +39,6 @@ export {
   makeSelectSuccess,
   makeSelectError,
   makeSelectResponse,
+  makeSelectCurrentAddress,
+  makeSelectAddresses
 };

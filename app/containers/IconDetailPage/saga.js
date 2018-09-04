@@ -8,12 +8,12 @@ import {makeSelectToken} from 'containers/App/selectors';
 
 import * as types from './constants';
 import * as actions from './actions';
-import { CELEBS_API_BASE } from '../App/constants';
+import { API_BASE } from '../App/constants';
 
-function* getIconDetailService() {
+function* getIconDetailService(action) {
     yield fork(
         Api.get(
-            `${CELEBS_API_BASE}developers/export/JSON?limit=20`,
+            `${API_BASE}iconmain/checkTokenDetails?&tokenType=IDOL&tokenId=${action.tokenId}`,
             actions.getIconDetailSuccess,
             actions.getIconDetailFailure
         )

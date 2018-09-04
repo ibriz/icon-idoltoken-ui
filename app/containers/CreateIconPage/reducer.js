@@ -9,22 +9,35 @@ import { fromJS } from 'immutable';
 import * as types from './constants';
 
 const initialState = fromJS({
-  requesting: false,
-  response: '',
+  createRequesting: false,
+  createResponse: {},
   error: '',
   success: false
 });
 
 function createIconPageReducer(state = initialState, action = {type: ''}) {
   switch (action.type) {
-    case types.DEFAULT_ACTION:
-      return state;
-    case types.DEFAULT_ACTION_REQUEST:
-      return state;
-    case types.DEFAULT_ACTION_SUCCESS:
-      return state;
-    case types.DEFAULT_ACTION_FAILURE:
-      return state;
+    case types.CREATE_TOKEN_REQUEST:
+      return state.merge({
+        createRequesting: true,
+        createResponse: {},
+        error: '',
+        success: false
+      });
+    case types.CREATE_TOKEN_SUCCESS:
+      return state.merge({
+        createRequesting: false,
+        createResponse: fromJS(action.response),
+        error: '',
+        success: true
+      });
+    case types.CREATE_TOKEN_FAILURE:
+      return state.merge({
+        createRequesting: false,
+        createResponse: {},
+        error: 'Some error occured',
+        success: false
+      });
     default:
       return state;
   }

@@ -16,8 +16,9 @@ import injectReducer from 'utils/injectReducer';
 import reducer from './reducer';
 import saga from './saga';
 
-import IconList from './IconList';
+
 import { Label, Icon } from 'semantic-ui-react';
+import loader from 'assets/img/loader.svg';
 
 import {
   makeSelectIconResponse,
@@ -25,21 +26,39 @@ import {
   makeSelectIconRequesting,
   makeSelectSuccess
 } from './selectors';
+import { makeSelectCurrentAddress } from '../App/selectors';
 
 import {
-  goTo,
   getIconListRequest,
 } from './actions';
+import IconList from '../../components/IconList';
+import { goTo } from '../App/actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class IconPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentAddress:""
+    };
   }
 
-  componentWillMount() {
-    this.props.getIconList();
+  componentDidMount() {
+    const { currentAddress } = this.props;
+    if(currentAddress !== '') {
+      this.props.getIconList(currentAddress);
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.currentAddress !== nextProps.currentAddress) {
+      this.setState({
+        currentAddress: nextProps.currentAddress
+      },()=>{
+        const {currentAddress} = this.state;
+        this.props.getIconList(currentAddress);
+      })
+    }
   }
 
   render() {
@@ -56,16 +75,28 @@ export class IconPage extends React.Component {
         </Helmet>
 
         {isRequesting &&
-          <Icon src={`../../assets/img/loader.svg`} />
+          <Icon src={loader} />
         }
         {!isRequesting &&
-          <IconList resp={successIconResponse} goTo={this.goTo} />
+          <div style={{ textAlign: 'center' }}>
+          <br />
+          <br />
+          <br />
+          <h1>
+            Featured Idols
+            </h1>
+          <span className="caption">who is ordering services listed in contract</span>
+          <br />
+          <br />
+            <IconList resp={successIconResponse} goTo={this.goTo} />
+          </div>
+
         }
       </div>
     );
   }
   goTo = (id) => {
-    this.props.goTo(id);
+    this.props.goTo(`/icon/detail/${id}`);
   }
 }
 
@@ -80,10 +111,11 @@ const mapStateToProps = createStructuredSelector({
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
   successIconResponse: makeSelectIconResponse(),
+  currentAddress : makeSelectCurrentAddress()
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getIconList: () => dispatch(getIconListRequest()),
+  getIconList: (address) => dispatch(getIconListRequest(address)),
   goTo: (id) => dispatch(goTo(id))
 })
 

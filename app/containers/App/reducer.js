@@ -28,6 +28,12 @@ const initialState = fromJS({
   dialog: null,
   user: null,
   token: '',
+  currentAddress:'hx65f6e18d378b57612a28f72acb97021eaa82aa5a',
+  addresses:[
+    "hx65f6e18d378b57612a28f72acb97021eaa82aa5a",
+    "hx2a7c46497d99e64d7198c267b5ca7deca265a4f8",
+    "hx40ebd13225ed28f7e98be3cd833ebe555cba72ca"
+  ]
 });
 
 function appReducer(state = initialState, action) {
@@ -69,6 +75,8 @@ function appReducer(state = initialState, action) {
         success: true,
         response: action.response.message,
       });
+    case types.SET_CURRENT_ADDRESS:
+      return state.set('currentAddress', action.address);
     default:
       return state;
   }

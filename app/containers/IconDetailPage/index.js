@@ -28,6 +28,8 @@ import {
   getIconDetailRequest,
 } from './actions';
 import { Image, Button, Icon } from 'semantic-ui-react';
+import defaultIdol from 'assets/default.jpg';
+import { deflate } from 'zlib';
 
 
 
@@ -36,15 +38,16 @@ export class IconDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: ''
+      tokenId: ''
     };
   }
 
   componentDidMount() {
     this.setState({
-      id: this.props.match.params.id ? this.props.match.params.id : ''
+      tokenId: this.props.match.params.id ? this.props.match.params.id : ''
     }, () => {
-      this.props.getIconDetail()
+      const { tokenId } = this.state;
+      this.props.getIconDetail(tokenId);
     })
   }
 
@@ -56,44 +59,46 @@ export class IconDetailPage extends React.Component {
           <title>IconDetailPage</title>
           <meta name="description" content="Description of IconDetailPage" />
         </Helmet>
+        {successResponse && successResponse.size > 0 &&
+          this.renderCeleb(successResponse.toJS())
+        }
+        {this.renderCeleb({
+  "address": "hx40ebd13225ed28f7e98be3cd833ebe555cba72ca",
+  "scoreAddress": "cx0bce5bfe899c4beec7ea93f2000e16351191017e",
+  "gender": "F",
+  "scoreMap": "{IDOL=cx0bce5bfe899c4beec7ea93f2000e16351191017e}",
+  "name": "Jennifer Aniston",
+  "tokenType": "IDOL",
+  "age": "0x31",
+  "ipfs_handle": "0xabcde12346"
+}
+)}
 
-        {successResponse && successResponse.toJS().BonusBucks && successResponse.toJS().BonusBucks.map((item, index) => {
-          return this.renderCeleb(item)
-        })}
-        {successResponse && successResponse.toJS().CelebrityValues && successResponse.toJS().CelebrityValues.map((item, index) => {
-          return this.renderCeleb(item)
-        })}
       </div>
     );
   }
 
   renderCeleb = (item) => {
-    const { id } = this.state;
-    if (item.celebId == id) {
+    const { tokenId } = this.state;
       return (
-
-
-        <div className="ui container text" key={item.celebId}>
+        <div className="ui container text">
           <br />
           <br />
           <h1>
-            Icon Name
-        </h1>
-          <Image src={`https://celebritybucks.com/images/celebs/full/${item.celebId}.jpg`} />
-
-
-          <label>Age:</label>21<br />
-          <label>Gender:</label>M<br />
+            {item.name}
+          </h1>
+          <Image src={defaultIdol} />
+          <label>Age:</label>{item.age}<br />
+          <label>Gender:</label>{item.gender}<br />
           {/*               
           <label class="idolLabel">Ipfs Handle:</label>0xabcde12346<br />
           <label class="idolLabel">Token Owner:</label>hx65f6e18d378b57612a28f72acb97021eaa82aa5a<br /> */}
 
           <Button primary onClick={this.onBuyIcon}>
-            BUY (${item.price} )
+            BUY
           </Button>
         </div>
       );
-    }
   }
 
   onBuyIcon = (e, d) => {
@@ -117,7 +122,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getIconDetail: () => dispatch(getIconDetailRequest())
+  getIconDetail: (tokenId) => dispatch(getIconDetailRequest(tokenId))
 })
 
 const withConnect = connect(

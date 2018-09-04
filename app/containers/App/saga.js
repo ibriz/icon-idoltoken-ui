@@ -6,7 +6,7 @@ import {
   select,
   cancel,
 } from 'redux-saga/effects';
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE, push } from 'react-router-redux';
 
 import Api from 'utils/Api';
 import * as types from './constants';
@@ -35,7 +35,11 @@ function* logoutFlow() {
   yield cancel(successWatcher);
 }
 
+function* goTo(action) {
+  yield put(push(action.id));
+}
 // Individual exports for testing
 export default function* defaultSaga() {
   yield takeLatest(types.LOGOUT_REQUEST, logoutFlow);
+  yield takeLatest(types.GO_TO, goTo);
 }

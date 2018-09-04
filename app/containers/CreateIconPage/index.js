@@ -21,13 +21,18 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { Form, Button, Input, Dropdown } from 'semantic-ui-react';
+import { makeSelectCurrentAddress } from '../App/selectors';
+import { goTo } from './actions';
+import CreateForm from './CreateForm';
+import { createTokenRequest } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class CreateIconPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      payload:{name: "", ipfs_handle: "", age: "", gender: "", tokenType: "IDOL"},
+      errors:{},
       gender: [
         {
           text: 'Male',
@@ -48,9 +53,56 @@ export class CreateIconPage extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.successResponse != this.props.successResponse && nextProps.successResponse.size > 0 ) {
+      this.setState({
+        payload:{name: "", ipfs_handle: "", age: "", gender: ""}
+      })
+      this.goTo();
+    }
+  }
+
+  goTo = () => {
+    this.props.goTo('/wallet')
+  }
+
+  validate = () => {
+    const { payload } = this.state;
+    let errors = {};
+    for (let load in payload) {
+      if(payload[load].length < 1)
+        errors[load] = 'Can\'t be empty';
+    }
+    return errors;
+  }
+
+  onCreateTokenSubmit = (event, data) => {
+    const errors = this.validate();
+
+    this.setState({errors},()=>{
+      if( Object.keys(errors).length == 0){
+        let payload = this.state.payload;
+        const { currentAddress } = this.props;
+        payload.address = currentAddress;
+        this.props.createToken(payload);
+      }  
+    });
+  }
+
+  onFormChange = (event, data) => {
+    this.setState({
+      payload: { 
+        ...this.state.payload,
+        [data.name] : data.value.trim()
+      }
+    })
+  }
+
   render() {
-    const { gender } = this.state;
-    const { } = this.props;
+    const { gender, payload } = this.state;
+    const { currentAddress, isRequesting } = this.props;
+    console.log('gender',gender);
+    
     return (
       <div className="ui container text">
         <Helmet>
@@ -61,46 +113,18 @@ export class CreateIconPage extends React.Component {
         <br />
         <br />
         <h1>Create Idol Token</h1>
-        <Form>
-
-          <Form.Field>
-            <label>Owner's Address:</label>
-            <p style={{ fontSize: '24px', color: '#999' }} > hx65f6e18d3...</p>
-          </Form.Field>
-          {/* <Form.Field>
-            <label>SCORE Address (Current):</label>
-            <label>cx0bce5bfe899c4beec7ea93f2000e16351191017e</label>
-          </Form.Field> */}
-          <Form.Field>
-            <label>Token Symbol (Current):</label>
-            <p>IDOL</p>
-          </Form.Field>
-          <Form.Field>
-            <label>First Name:</label>
-            <Input placeholder="First Name" type="text" name="name" fluid />
-          </Form.Field>
-          <Form.Field>
-            <label>Age:</label>
-            <Input placeholder='Age' type="number" name="age" fluid />
-          </Form.Field>
-          <Form.Field>
-            <label>Gender:</label>
-            <Dropdown search selection options={gender} placeholder="Select Gender" name="gender" fluid />
-          </Form.Field>
-          <Form.Field>
-            <label>IPFS Handle:</label>
-            <Input placeholder='IPFS Handle' type="text" name="ipfs_handle" fluid />
-          </Form.Field>
-          <Button primary type='submit' onClick={this.onCreateTokenSubmit}>Create Idol Token</Button>
-        </Form>
+        <CreateForm 
+          payload ={payload}
+          gender={gender} 
+          currentAddress={currentAddress} 
+          goTo={this.goTo}
+          onCreateTokenSubmit={this.onCreateTokenSubmit}
+          onFormChange = {this.onFormChange}
+          isRequesting = {isRequesting}
+        />
       </div>
     );
   }
-
-  onCreateTokenSubmit = (event, data) => {
-    console.log('onCreateTokenSubmit clicked!');
-  }
-
 
 }
 
@@ -108,7 +132,6 @@ CreateIconPage.propTypes = {
   isRequesting: PropTypes.bool.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   errorResponse: PropTypes.string.isRequired,
-  successResponse: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -116,10 +139,12 @@ const mapStateToProps = createStructuredSelector({
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
   successResponse: makeSelectResponse(),
+  currentAddress : makeSelectCurrentAddress()
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  createToken : (payload) => dispatch(createTokenRequest(payload)),
+  goTo : (path) => dispatch(goTo(path)),
 })
 
 const withConnect = connect(

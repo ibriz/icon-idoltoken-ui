@@ -8,24 +8,19 @@ import {makeSelectToken} from 'containers/App/selectors';
 
 import * as types from './constants';
 import * as actions from './actions';
-import { CELEBS_API_BASE } from '../App/constants';
+import { API_BASE } from '../App/constants';
 
-function* getIconListService() {
+function* getIconListService(action) {
     yield fork(
         Api.get(
-            `${CELEBS_API_BASE}developers/export/JSON?limit=20`,
+            `${API_BASE}iconmain/checkAccountPage?address=${action.payload}&tokenType=IDOL`,
             actions.getIconListSuccess,
             actions.getIconListFailure
         )
     );
 }
 
-function* goTo(action) {
-    yield put(push(`/icon/detail/${action.id}`));
-}
-
 // Individual exports for testing
 export default function* defaultSaga() {
     yield takeLatest(types.GET_ICON_LIST_REQUEST, getIconListService);
-    yield takeLatest(types.GO_TO, goTo);
 }

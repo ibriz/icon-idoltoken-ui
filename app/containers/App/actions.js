@@ -114,3 +114,7 @@ export const setToast = action(types.SET_TOAST, 'toast');
 
 export const updateFirstLoadRequest = action(types.UPDATE_FIRST_LOAD_REQUEST);
 export const updateFirstLoadSuccess = action(types.UPDATE_FIRST_LOAD_SUCCESS);
+
+export const setCurrentAddress = action(types.SET_CURRENT_ADDRESS, 'address');
+
+export const goTo = action(types.GO_TO, 'id');

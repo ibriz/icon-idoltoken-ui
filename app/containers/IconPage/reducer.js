@@ -17,8 +17,6 @@ const initialState = fromJS({
 
 function iconPageReducer(state = initialState, action) {
   switch (action.type) {
-    case types.GO_TO:
-      return state;
     case types.GET_ICON_LIST_REQUEST:
       return state.merge({
         iconRequesting : true,

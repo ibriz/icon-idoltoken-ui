@@ -39,6 +39,8 @@ export const POST_INTRO_TOOL_REQUEST = 'project/App/POST_INTRO_TOOL_REQUEST';
 export const POST_INTRO_TOOL_SUCCESS = 'project/App/POST_INTRO_TOOL_SUCCESS';
 export const POST_INTRO_TOOL_FAILURE = 'project/App/POST_INTRO_TOOL_FAILURE';
 
+export const SET_CURRENT_ADDRESS = 'project/App/SET_CURRENT_ADDRESS';
+
 export const UPDATE_FIRST_LOAD_REQUEST =
   'project/App/UPDATE_FIRST_LOAD_REQUEST';
 export const UPDATE_FIRST_LOAD_SUCCESS =
@@ -47,7 +49,7 @@ export const UPDATE_FIRST_LOAD_SUCCESS =
 export const API_BASE =
   process.env.NODE_ENV === 'production'
     ? 'https://www.techastep.com/api/'
-    : 'https://www.techastep.com/api/';
+    : 'http://d65f3234.ngrok.io/';
 
 
 export const CELEBS_API_BASE = 'https://celebritybucks.com/';
@@ -59,3 +61,4 @@ export const DOCUMENT_URL =
     : 'https://s3.amazonaws.com/xchangewallet-dev/';
 
 export const DEFAULT_LOCALE = 'en';
+export const GO_TO = 'app/GO_TO';

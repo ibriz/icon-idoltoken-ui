@@ -15,6 +15,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import Toaster from 'components/Toaster';
 import HomePage from 'containers/HomePage/Loadable';
@@ -40,6 +41,7 @@ import {
 } from './selectors';
 
 import saga from './saga';
+import reducer from './reducer';
 
 const App = props => {
   let message;
@@ -65,7 +67,7 @@ const App = props => {
         <Route exact path="/" component={IconPage} />
         <Route path="/icon/detail/:id" component={IconDetailPage} />
         <Route path="/token/create" component={CreateIconPage} />
-        <Route path="/wallet" component={MyWalletPage} />
+        <Route exact path="/wallet" component={MyWalletPage} />
         <Route path="/transfer/token" component={TransferTokenPage} />
 
         <GuestRoute
@@ -105,10 +107,19 @@ const mapStateToProps = createStructuredSelector({
   successResponse: makeSelectResponse(),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  
+})
+
+const withReducer = injectReducer({ key: 'global', reducer });
 const withSaga = injectSaga({ key: 'global', saga });
-const withConnect = connect(mapStateToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 export default compose(
+  withReducer,
   withSaga,
   withConnect,
 )(App);

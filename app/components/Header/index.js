@@ -1,18 +1,30 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { Dropdown } from 'semantic-ui-react';
-import A from './A';
-import Img from './Img';
-import NavBar from './NavBar';
-import HeaderLink from './HeaderLink';
 import Icon from 'assets/img/icon.svg';
 import user from 'assets/img/user.jpg';
-import messages from './messages';
 import Link from "react-router-dom/Link"
+
+import { makeSelectAddresses } from '../../containers/App/selectors';
+import reducer from '../../containers/App/reducer';
+import { setCurrentAddress } from '../../containers/App/actions';
+
+import injectReducer from 'utils/injectReducer';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 /* eslint-disable react/prefer-stateless-function */
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  setCurrentAddress = (address) => {
+    this.props.setCurrentAddress(address);
+  }
+
   render() {
+    const { addresses } = this.props;
     return (
       <header style={{ padding: '0 20px', borderBottom: '1px solid #eee' }}>
         <Link to="/"><img src={Icon} /></Link>
@@ -20,17 +32,16 @@ class Header extends React.Component {
         <div style={{ float: 'right' }}>
           <Dropdown style={{ padding: '20px 20px 0' }} text='Accounts'>
             <Dropdown.Menu>
-
-              <Dropdown.Item>
-                <Link to="/">
-                  hx65f6e..
-              </Link>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Link to="/">
-                  hx65f6e..
-              </Link>
-              </Dropdown.Item>
+              { addresses && addresses.map((item, index)=>{
+                console.log(item)
+                return (
+                  <Dropdown.Item key={`${index}_${item}`} onClick={() => this.setCurrentAddress(item)}>
+                    {/* <Link to="/"> */}
+                    {item}
+                    {/* </Link> */}
+                  </Dropdown.Item>
+                );
+              })}
             </Dropdown.Menu>
           </Dropdown>
 
@@ -50,4 +61,22 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = createStructuredSelector({
+  addresses : makeSelectAddresses()
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentAddress :(address) => dispatch(setCurrentAddress(address))
+})
+
+const withReducer = injectReducer({ key: 'global', reducer });
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default compose(
+  withReducer,
+  withConnect,
+)(Header);
