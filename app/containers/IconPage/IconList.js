@@ -60,9 +60,10 @@ const IconCard = (item, goTo) => (
   <Grid.Column key={item.celebId} onClick={() => goTo(item.celebId)}>
     <Card>
       <Image src={`https://celebritybucks.com/images/celebs/full/${item.celebId}.jpg`} />
-      <Card.Content>
+      <br /><Card.Content>
         <Card.Header><b>{item.name}</b></Card.Header>
-        <span> ${item.price}</span>
+        <label>Age:</label>21<br />
+        <label>Gender:</label>M<br />
       </Card.Content>
 
     </Card>
