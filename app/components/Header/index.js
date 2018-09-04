@@ -6,44 +6,46 @@ import Img from './Img';
 import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 import Icon from 'assets/img/icon.svg';
+import user from 'assets/img/user.jpg';
 import messages from './messages';
+import Link from "react-router-dom/Link"
 
 /* eslint-disable react/prefer-stateless-function */
 class Header extends React.Component {
   render() {
     return (
-      <header>
-        <img src={Icon} />
-        <Dropdown text='ICON Operations'>
-          <Dropdown.Menu>
-            <Dropdown.Item text='New' />
-            <Dropdown.Item text='Open...' description='ctrl + o' />
-          </Dropdown.Menu>
-        </Dropdown>
+      <header style={{ padding: '0 20px', borderBottom: '1px solid #eee' }}>
+        <Link to="/"><img src={Icon} /></Link>
 
-        <Dropdown text='ICON Operatoins'>
-          <Dropdown.Menu>
-            <Dropdown.Item text='New' />
-            <Dropdown.Item text='Open...' description='ctrl + o' />
-          </Dropdown.Menu>
-        </Dropdown>
+        <div style={{ float: 'right' }}>
+          <Dropdown style={{ padding: '20px 20px 0' }} text='Accounts'>
+            <Dropdown.Menu>
 
-        <NavBar>
-          <HeaderLink to="/">
-            <FormattedMessage {...messages.home} />
-          </HeaderLink>
-          <HeaderLink to="/icon">
-            <FormattedMessage {...messages.icons} />
-          </HeaderLink>
+              <Dropdown.Item>
+                <Link to="/">
+                  hx65f6e..
+              </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link to="/">
+                  hx65f6e..
+              </Link>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
 
-          <HeaderLink to="/user">
-            <FormattedMessage {...messages.userDetail} />
-          </HeaderLink>
-          {/* <HeaderLink to="/login">
-            <FormattedMessage {...messages.login} />
-          </HeaderLink> */}
-        </NavBar>
-      </header>
+          <Dropdown style={{ padding: '20px 20px 0' }} text='About'>
+            <Dropdown.Menu>
+              <Dropdown.Item text='ICON Foundation' />
+              <Dropdown.Item text='ICON Token(ICX)' />
+              <Dropdown.Item text='Sample ICON' />
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Link to="/wallet"> <img src={user} style={{ width: '40px', height: '40px', position: 'relative', top: '5px' }} />
+          </Link>
+        </div>
+      </header >
     );
   }
 }

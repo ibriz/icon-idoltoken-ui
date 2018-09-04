@@ -28,6 +28,10 @@ import UserRoute from 'components/Routes/UserRoute';
 import IconPage from 'containers/IconPage/Loadable';
 import IconDetailPage from 'containers/IconDetailPage/Loadable';
 import UserDetailPage from 'containers/UserDetailPage/Loadable';
+import CreateIconPage from 'containers/CreateIconPage/Loadable';
+import MyWalletPage from 'containers/MyWalletPage/Loadable';
+import TransferTokenPage from 'containers/TransferTokenPage/Loadable';
+
 import {
   makeSelectDialog,
   makeSelectLocation,
@@ -49,19 +53,21 @@ const App = props => {
   return (
     <div>
       <Helmet
-        titleTemplate="%s - BitsBeat Boilerplate"
-        defaultTitle="BitsBeat Boilerplate"
+        titleTemplate="%s - IDOL TOKEN"
+        defaultTitle="IDOL TOKEN"
       >
-        <meta name="description" content="A BitsBeat Boilerplate application" />
+        <meta name="description" content="A ICON Token application" />
       </Helmet>
       <Header />
       {message}
       {dialog && dialog.size > 0 && dialog.toJS()}
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/user" component={UserDetailPage} />
+        <Route exact path="/" component={IconPage} />
         <Route path="/icon/detail/:id" component={IconDetailPage} />
-        <Route exact path="/icon" component={IconPage} />
+        <Route path="/token/create" component={CreateIconPage} />
+        <Route path="/wallet" component={MyWalletPage} />
+        <Route path="/transfer/token" component={TransferTokenPage} />
+
         <GuestRoute
           exact
           location={location}
