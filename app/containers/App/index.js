@@ -37,15 +37,6 @@ import {
 
 import saga from './saga';
 
-const AppWrapper = styled.div`
-  max-width: calc(768px + 16px * 2);
-  margin: 0 auto;
-  display: flex;
-  min-height: 100%;
-  padding: 0 16px;
-  flex-direction: column;
-`;
-
 const App = props => {
   let message;
   const { location, dialog, errorResponse, successResponse } = props;
@@ -56,7 +47,7 @@ const App = props => {
     message = <Toaster message={errorResponse} error />;
   }
   return (
-    <AppWrapper>
+    <div>
       <Helmet
         titleTemplate="%s - BitsBeat Boilerplate"
         defaultTitle="BitsBeat Boilerplate"
@@ -85,7 +76,7 @@ const App = props => {
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />
-    </AppWrapper>
+    </div>
   );
 };
 

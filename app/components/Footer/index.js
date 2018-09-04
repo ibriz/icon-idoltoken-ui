@@ -8,19 +8,9 @@ import messages from './messages';
 
 function Footer() {
   return (
-    <Wrapper>
-      <section>
-        <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://bitsbeat.com/team">BitsBeat Family</A>,
-          }}
-        />
-      </section>
-    </Wrapper>
+    <div>
+
+    </div>
   );
 }
 

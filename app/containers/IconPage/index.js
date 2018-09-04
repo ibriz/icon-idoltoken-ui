@@ -20,53 +20,51 @@ import IconList from './IconList';
 import { Label, Icon } from 'semantic-ui-react';
 
 import {
-  makeSelectIconResponse, 
-  makeSelectError, 
-  makeSelectIconRequesting, 
+  makeSelectIconResponse,
+  makeSelectError,
+  makeSelectIconRequesting,
   makeSelectSuccess
 } from './selectors';
 
-import { 
+import {
   goTo,
   getIconListRequest,
 } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class IconPage extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.props.getIconList();
   }
 
   render() {
-    const {} = this.state;
+    const { } = this.state;
     const {
       isRequesting,
       successIconResponse,
     } = this.props;
     return (
-      <div>
+      <div className="ui container">
         <Helmet>
           <title>IconPage</title>
           <meta name="description" content="Description of IconPage" />
         </Helmet>
-        <h1>
-          This is Icon List Page
-        </h1>
+
         {isRequesting &&
           <Icon src={`../../assets/img/loader.svg`} />
         }
         {!isRequesting &&
-          <IconList resp={successIconResponse} goTo={this.goTo}/>
+          <IconList resp={successIconResponse} goTo={this.goTo} />
         }
       </div>
     );
   }
-  goTo = (id) =>{
+  goTo = (id) => {
     this.props.goTo(id);
   }
 }
@@ -85,8 +83,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getIconList : () => dispatch(getIconListRequest()),
-  goTo : (id) => dispatch(goTo(id))
+  getIconList: () => dispatch(getIconListRequest()),
+  goTo: (id) => dispatch(goTo(id))
 })
 
 const withConnect = connect(

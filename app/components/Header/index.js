@@ -1,18 +1,33 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
+import { Dropdown } from 'semantic-ui-react';
 import A from './A';
 import Img from './Img';
 import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
-import BitsBeat from './bitsbeat.png';
+import Icon from 'assets/img/icon.svg';
 import messages from './messages';
 
 /* eslint-disable react/prefer-stateless-function */
 class Header extends React.Component {
   render() {
     return (
-      <div>
+      <header>
+        <img src={Icon} />
+        <Dropdown text='ICON Operations'>
+          <Dropdown.Menu>
+            <Dropdown.Item text='New' />
+            <Dropdown.Item text='Open...' description='ctrl + o' />
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown text='ICON Operatoins'>
+          <Dropdown.Menu>
+            <Dropdown.Item text='New' />
+            <Dropdown.Item text='Open...' description='ctrl + o' />
+          </Dropdown.Menu>
+        </Dropdown>
+
         <NavBar>
           <HeaderLink to="/">
             <FormattedMessage {...messages.home} />
@@ -20,9 +35,7 @@ class Header extends React.Component {
           <HeaderLink to="/icon">
             <FormattedMessage {...messages.icons} />
           </HeaderLink>
-          <HeaderLink to="/icon/detail">
-            <FormattedMessage {...messages.iconDetail} />
-          </HeaderLink>
+
           <HeaderLink to="/user">
             <FormattedMessage {...messages.userDetail} />
           </HeaderLink>
@@ -30,7 +43,7 @@ class Header extends React.Component {
             <FormattedMessage {...messages.login} />
           </HeaderLink> */}
         </NavBar>
-      </div>
+      </header>
     );
   }
 }

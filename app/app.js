@@ -15,7 +15,6 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
-import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
@@ -31,9 +30,6 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
-
-// Import CSS reset and Global Styles
-import './global-styles';
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -84,7 +80,7 @@ if (!window.Intl) {
         import('intl/locale-data/jsonp/en.js'),
         import('intl/locale-data/jsonp/de.js'),
       ]),
-    )
+  )
     .then(() => render(translationMessages))
     .catch(err => {
       throw err;
