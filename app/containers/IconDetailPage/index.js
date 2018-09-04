@@ -83,7 +83,7 @@ export class IconDetailPage extends React.Component {
           <label class="idolLabel">Token Owner:</label>hx65f6e18d378b57612a28f72acb97021eaa82aa5a<br /> */}
 
           <Button primary onClick={this.onBuyIcon}>
-            BUY
+            Transfer
           </Button>
         </div>
       );
