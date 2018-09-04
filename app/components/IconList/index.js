@@ -20,7 +20,7 @@ const iconsList = (tokenList, goTo) => {
             IconCard(item, goTo)
           );
         })}
-        {typeof(tokenList) == 'undefined' &&
+        {typeof(tokenList) == 'undefined'  || (tokenList && tokenList.length ==0) &&
           <h3>No Idols</h3>
         }
       </Grid>

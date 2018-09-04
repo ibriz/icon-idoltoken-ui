@@ -47,15 +47,15 @@ export class MyWalletPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    // if(this.state.currentAddress !== nextProps.currentAddress) {
-    //   this.setState({
-    //     currentAddress: nextProps.currentAddress
-    //   },()=>{
-    //   console.log('56');
-    //   const {currentAddress} = this.state;
-    //     this.props.getIconList(currentAddress);
-    //   })
-    // }
+    if(this.props.currentAddress !== nextProps.currentAddress) {
+      this.setState({
+        currentAddress: nextProps.currentAddress
+      },()=>{
+      console.log('56');
+      const {currentAddress} = this.state;
+        this.props.getIconList(currentAddress);
+      })
+    }
   }
 
   render() {
