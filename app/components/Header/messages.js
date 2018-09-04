@@ -14,16 +14,20 @@ export default defineMessages({
     id: 'boilerplate.components.Header.icons',
     defaultMessage: 'Icons',
   },
-  iconDetail: {
-    id: 'boilerplate.components.Header.iconDetail',
-    defaultMessage: 'Icon Detail',
-  },
-  userDetail: {
-    id: 'boilerplate.components.Header.userDetail',
-    defaultMessage: 'User Detail',
-  },
   login: {
     id: 'boilerplate.components.Header.login',
     defaultMessage: 'Login',
+  },
+  createToken: {
+    id: 'boilerplate.components.Header.createToken',
+    defaultMessage: 'Create Token',
+  },
+  myWallet: {
+    id: 'boilerplate.components.Header.myWallet',
+    defaultMessage: 'My Wallet',
+  },
+  transferToken: {
+    id: 'boilerplate.components.Header.transferToken',
+    defaultMessage: 'Transfer Token',
   },
 });

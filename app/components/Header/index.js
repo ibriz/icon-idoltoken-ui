@@ -20,15 +20,15 @@ class Header extends React.Component {
           <HeaderLink to="/icon">
             <FormattedMessage {...messages.icons} />
           </HeaderLink>
-          <HeaderLink to="/icon/detail">
-            <FormattedMessage {...messages.iconDetail} />
+          <HeaderLink to="/token/create">
+            <FormattedMessage {...messages.createToken} />
           </HeaderLink>
-          <HeaderLink to="/user">
-            <FormattedMessage {...messages.userDetail} />
+          <HeaderLink to="/wallet">
+            <FormattedMessage {...messages.myWallet} />
           </HeaderLink>
-          {/* <HeaderLink to="/login">
-            <FormattedMessage {...messages.login} />
-          </HeaderLink> */}
+          <HeaderLink to="/transfer/token">
+            <FormattedMessage {...messages.transferToken} />
+          </HeaderLink>
         </NavBar>
       </div>
     );
