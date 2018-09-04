@@ -62,18 +62,6 @@ export class IconDetailPage extends React.Component {
         {successResponse && successResponse.size > 0 &&
           this.renderCeleb(successResponse.toJS())
         }
-        {this.renderCeleb({
-  "address": "hx40ebd13225ed28f7e98be3cd833ebe555cba72ca",
-  "scoreAddress": "cx0bce5bfe899c4beec7ea93f2000e16351191017e",
-  "gender": "F",
-  "scoreMap": "{IDOL=cx0bce5bfe899c4beec7ea93f2000e16351191017e}",
-  "name": "Jennifer Aniston",
-  "tokenType": "IDOL",
-  "age": "0x31",
-  "ipfs_handle": "0xabcde12346"
-}
-)}
-
       </div>
     );
   }
