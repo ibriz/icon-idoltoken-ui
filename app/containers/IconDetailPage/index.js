@@ -81,7 +81,6 @@ export class IconDetailPage extends React.Component {
         </h1>
           <Image src={`https://celebritybucks.com/images/celebs/full/${item.celebId}.jpg`} />
 
-
           <label>Age:</label>21<br />
           <label>Gender:</label>M<br />
           {/*               

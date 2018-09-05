@@ -1,0 +1,17 @@
+
+
+
+.media img { float: left;}
+.media-content { overflow: hidden; padding-left:20px;}
+.clear { clear: both;}
+
+.getBtn { letter-spacing:2px; background:#333; color:#fff; float: right; border:none; 
+    position: relative;     top: -15px; right:20px;
+    padding: 7px 15px;
+    border-radius: 2px;}
+
+.faded { font-size: 14px; color:#999 }
+.media { padding-bottom:10px; padding-top:10px;}
+.media h3 { margin:0;}
+
+.media:hover { background:#f0f0f0; }

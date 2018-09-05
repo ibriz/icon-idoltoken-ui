@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Card, Icon, Grid } from 'semantic-ui-react';
+import user from "assets/img/user.jpg";
 
 function IconList(props) {
   const { BonusBucks, CelebrityValues } = props.resp.toJS();
@@ -34,14 +35,16 @@ function IconList(props) {
 
 const iconsList = (iconsList, goTo) => {
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div>
       <br />
       <br />
       <br />
-      <h1>
-        Featured Idols
+      <div style={{ textAlign: 'center' }}>
+        <h1>
+          Featured Idols
          </h1>
-      <span className="caption">who is ordering services listed in contract</span>
+        <span className="caption">who is ordering services listed in contract</span>
+      </div>
       <br />
       <br />
       <Grid stackable doubling columns="4">
@@ -51,7 +54,107 @@ const iconsList = (iconsList, goTo) => {
           );
         })}
       </Grid>
-    </div>
+      <br />
+      <br />
+      <br />
+      <Grid columns="2">
+        <Grid.Column>
+          <h2>Most Popular Idols</h2>
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+        </Grid.Column>
+        <Grid.Column>
+          <h2>Recenly Added</h2>
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+
+          <div className="media">
+            <img style={{ width: '40px' }} src={user} />
+            <div className="media-content">
+              <h3>Jessica Alba</h3>
+              <span className="faded">
+                23,000 Tokens
+</span>
+              <button className="getBtn">GET</button> </div>
+            <div className="clear"></div>
+          </div>
+        </Grid.Column>
+
+
+      </Grid>
+
+    </div >
   );
 }
 
@@ -65,7 +168,6 @@ const IconCard = (item, goTo) => (
         <label>Age:</label>21<br />
         <label>Gender:</label>M<br />
       </Card.Content>
-
     </Card>
   </Grid.Column>
 )
