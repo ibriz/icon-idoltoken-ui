@@ -17,7 +17,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 
-import { Label, Icon } from 'semantic-ui-react';
+import { Icon, Grid } from 'semantic-ui-react';
 import loader from 'assets/img/loader.svg';
 
 import {
@@ -33,6 +33,8 @@ import {
 } from './actions';
 import IconList from '../../components/IconList';
 import { goTo } from '../App/actions';
+import MostPopular from './MostPopular';
+import RecentlyAdded from './RecentlyAdded';
 
 /* eslint-disable react/prefer-stateless-function */
 export class IconPage extends React.Component {
@@ -79,18 +81,24 @@ export class IconPage extends React.Component {
         }
         {!isRequesting &&
           <div style={{ textAlign: 'center' }}>
-          <br />
-          <br />
-          <br />
-          <h1>
-            Featured Idols
-            </h1>
-          <span className="caption">who is ordering services listed in contract</span>
-          <br />
-          <br />
+            <br />
+            <br />
+            <br />
+            <h1>
+              Featured Idols
+              </h1>
+            <span className="caption">who is ordering services listed in contract</span>
+            <br />
+            <br />
             <IconList resp={successIconResponse} goTo={this.goTo} />
+            <br />
+            <br />
+            <br />
+            <Grid columns="2">
+              <MostPopular />
+              <RecentlyAdded />
+            </Grid>
           </div>
-
         }
       </div>
     );

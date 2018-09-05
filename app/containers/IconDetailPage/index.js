@@ -27,11 +27,8 @@ import {
 import {
   getIconDetailRequest,
 } from './actions';
-import { Image, Button, Icon } from 'semantic-ui-react';
+import { Image, Button, Table, Label } from 'semantic-ui-react';
 import defaultIdol from 'assets/default.jpg';
-import { deflate } from 'zlib';
-
-
 
 /* eslint-disable react/prefer-stateless-function */
 export class IconDetailPage extends React.Component {
@@ -76,11 +73,33 @@ export class IconDetailPage extends React.Component {
             {item.name}
           </h1>
           <Image src={defaultIdol} />
-          <label>Age:</label>{item.age}<br />
-          <label>Gender:</label>{item.gender}<br />
-          <label>Address:</label>{item.address}<br />
-          <label>Token Type:</label>{item.tokenType}<br />
-          <label>IPFS Handle:</label>{item.ipfs_handle}<br />
+
+          <Table celled compact>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>
+                  <Label ribbon><label className="idolLabel">Token Address:</label></Label>
+                </Table.Cell>
+                <Table.Cell>{item.address}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell><Label ribbon>Age:</Label></Table.Cell>
+                <Table.Cell>{item.age}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell> <Label ribbon>Gender:</Label></Table.Cell>
+                <Table.Cell>{item.gender}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell><Label ribbon>Token Type:</Label> </Table.Cell>
+                <Table.Cell>{item.tokenType}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell><Label ribbon>IFPS Handle:</Label> </Table.Cell>
+                <Table.Cell>{item.ipfs_handle}</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
           {/*               
           <label class="idolLabel">Ipfs Handle:</label>0xabcde12346<br />
           <label class="idolLabel">Token Owner:</label>hx65f6e18d378b57612a28f72acb97021eaa82aa5a<br /> */}
