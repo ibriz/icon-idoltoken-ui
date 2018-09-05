@@ -12,8 +12,6 @@ function CreateForm (props) {
     isRequesting
   } = props;
 
-  console.log(isRequesting);
-  
   return(
     <Form>
       <Form.Field>

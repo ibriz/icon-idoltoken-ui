@@ -101,7 +101,6 @@ export class CreateIconPage extends React.Component {
   render() {
     const { gender, payload } = this.state;
     const { currentAddress, isRequesting } = this.props;
-    console.log('gender',gender);
     
     return (
       <div className="ui container text">
