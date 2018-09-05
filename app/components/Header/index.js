@@ -46,9 +46,15 @@ class Header extends React.Component {
 
           <Dropdown style={{ padding: '20px 20px 0' }} text='About'>
             <Dropdown.Menu>
-              <Dropdown.Item text='ICON Foundation' />
-              <Dropdown.Item text='ICON Token(ICX)' />
-              <Dropdown.Item text='Sample ICON' />
+              <Dropdown.Item>
+                <a href="https://icon.foundation/?lang=en" target="_blank">ICON Foundation</a>
+              </Dropdown.Item>
+
+              <Dropdown.Item>
+                <a href="https://tracker.icon.foundation/" target="_blank">ICON Token(ICX)</a>
+              </Dropdown.Item>
+
+              {/* <Dropdown.Item text='Sample ICON' /> */}
             </Dropdown.Menu>
           </Dropdown>
 
