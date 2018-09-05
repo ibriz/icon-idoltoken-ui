@@ -1,28 +1,38 @@
 import React from 'react';
 import Link from "react-router-dom/Link";
-import { Table, Label, Card, Image, Grid } from 'semantic-ui-react';
+import { Table, Label, Card, Image, Grid, Button } from 'semantic-ui-react';
 import user from 'assets/img/user.jpg';
 import defaultIdol from 'assets/default.jpg';
 import IconList from '../../components/IconList';
+
 function WalletInfo(props) {
-  const { walletInfo } = props;
+  const { walletInfo, onCreateButtonsClick, currentAddress, addresses } = props;
   return (
     <div className="ui container text" id="content" role="main">
       <br />
       <br />
       <h1>My Wallet</h1>
-      <Link style={{ float: 'left' }} to="/wallet"> <img src={user} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+      <Link style={{ float: 'left' }} to="/wallet"> <img src={defaultIdol} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
       </Link>
       <div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
         <h3>Jessica Alba</h3>
-        23yrs / F<br />
-        <Link to="/token/create" >
-          Create Token(IDOL)
-              </Link >
+        {/* 23yrs / F<br /> */}
+        {currentAddress == addresses.toJS()[0] &&
+          <Button 
+            primary
+            onClick={()=> onCreateButtonsClick('/token/create')}
+          >
+            Create Token(IDOL)
+          </Button>
+        }
 
-        <Link style={{ paddingLeft: '20px' }} to="/transfer/token">
+        <Button 
+          style={{ paddingLeft: '20px' }}
+          primary
+          onClick={()=> onCreateButtonsClick('/transfer/token')}
+        >
           Transfer Token (IDOL)
-              </Link>
+        </Button>
       </div>
 
 

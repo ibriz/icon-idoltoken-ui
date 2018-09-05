@@ -33,7 +33,6 @@ class Header extends React.Component {
           <Dropdown style={{ padding: '20px 20px 0' }} text='Accounts'>
             <Dropdown.Menu>
               { addresses && addresses.map((item, index)=>{
-                console.log(item)
                 return (
                   <Dropdown.Item key={`${index}_${item}`} onClick={() => this.setCurrentAddress(item)}>
                     {/* <Link to="/"> */}

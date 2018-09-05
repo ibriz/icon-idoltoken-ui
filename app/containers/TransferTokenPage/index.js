@@ -21,13 +21,22 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { Form, Button, Input, Dropdown } from 'semantic-ui-react';
+import TransferTokenForm from './TransferTokenForm';
+import { goTo } from '../App/actions';
+import { makeSelectCurrentAddress } from '../App/selectors';
+import { tokenTransferRequest } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class TransferTokenPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      formData: {
+        fromAddress:this.props.currentAddress,
+        tokenType:"",
+        toAddress:"",
+        tokenId:"",
+      },
       tokenTypes: [
         {
           text: 'IDOL',
@@ -37,10 +46,21 @@ export class TransferTokenPage extends React.Component {
       ]
     };
   }
-  state = {};
+  
+  componentWillReceiveProps(nextProps) {
+    if(this.props.currentAddress != nextProps.currentAddress && nextProps.currentAddress != '') {
+      this.setState({
+        formData: {
+          ...this.state.formData,
+          fromAddress: nextProps.currentAddress
+        }
+      })
+    }
+  }
+
   render() {
-    const { tokenTypes } = this.state;
-    const { } = this.props;
+    const { tokenTypes, formData } = this.state;
+    const { isRequesting, currentAddress } = this.props;
     return (
       <div className="ui container text">
         <Helmet>
@@ -49,33 +69,39 @@ export class TransferTokenPage extends React.Component {
         </Helmet>
         <br />
         <br />
-        <h1>Transfer Token</h1>
-        <Form>
-          <Form.Field>
-            <label>Owner's Address:</label>
-            <Input placeholder="Owner's Address" type="text" name="fromAddress" fluid />
-          </Form.Field>
-          <Form.Field>
-            <label>Token Type:</label>
-            <Dropdown search selection options={tokenTypes} placeholder="Token Type" name="tokenType" fluid />
-          </Form.Field>
-          <Form.Field>
-            <label>To Address:</label>
-            <Input placeholder="To Address" type="text" name="toAddress" fluid />
-          </Form.Field>
-          <Form.Field>
-            <label>TokenId:</label>
-            <Input placeholder="Token ID" type="text" name="tokenId" fluid />
-          </Form.Field>
-
-          <Button primary type='submit' onClick={this.onTransferTokenSubmit}>Transfer Idol Token</Button>
-        </Form>
+        <h1>Transfer Idol</h1>
+        <TransferTokenForm 
+          tokenTypes = { tokenTypes }
+          formData={formData}
+          onTransferTokenSubmit = { this.onTransferTokenSubmit }
+          goTo = {this.goBack}
+          isRequesting ={isRequesting}
+          onTransferTokenChange = {this.onTransferTokenChange}
+          currentAddress={currentAddress}
+        />
       </div>
     );
   }
 
-  onTransferTokenSubmit = (event, data) => {
-    console.log('onTransferTokenSubmit clicked!');
+  onTransferTokenChange = (event, data) => {
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        [data.name] : data.value
+      }
+    },()=>{
+      console.log(this.state.formData);
+      
+    })
+  }
+
+  onTransferTokenSubmit = () => {
+    const { formData } = this.state;
+    this.props.tokenTransfer(formData);
+  }
+
+  goBack = () => {
+    this.props.goTo('/wallet')
   }
 }
 
@@ -83,7 +109,7 @@ TransferTokenPage.propTypes = {
   isRequesting: PropTypes.bool.isRequired,
   isSuccess: PropTypes.bool.isRequired,
   errorResponse: PropTypes.string.isRequired,
-  successResponse: PropTypes.string.isRequired,
+  successResponse: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -91,10 +117,12 @@ const mapStateToProps = createStructuredSelector({
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
   successResponse: makeSelectResponse(),
+  currentAddress: makeSelectCurrentAddress(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  goTo : (path) => dispatch(goTo(path)),
+  tokenTransfer: (payload) => dispatch(tokenTransferRequest(payload)),
 })
 
 const withConnect = connect(
