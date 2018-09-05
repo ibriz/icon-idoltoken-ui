@@ -93,7 +93,7 @@ export class CreateIconPage extends React.Component {
     this.setState({
       payload: { 
         ...this.state.payload,
-        [data.name] : data.value.trim()
+        [data.name] : data.value
       }
     })
   }

@@ -15,7 +15,7 @@ function WalletInfo(props) {
       <Link style={{ float: 'left' }} to="/wallet"> <img src={defaultIdol} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
       </Link>
       <div style={{ overflow: 'hidden', paddingLeft: '20px' }}>
-        <h3>Jessica Alba</h3>
+        {/* <h3>Jessica Alba</h3> */}
         {/* 23yrs / F<br /> */}
         {currentAddress == addresses.toJS()[0] &&
           <Button 
