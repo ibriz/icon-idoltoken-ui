@@ -16,13 +16,18 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 // import makeSelectCreateIconPage from './selectors';
 import {
-  makeSelectRequesting, makeSelectError, makeSelectResponse, makeSelectSuccess
+  makeSelectRequesting,
+  makeSelectError,
+  makeSelectResponse,
+  makeSelectSuccess,
+  makeSelectImageResponse,
+  makeSelectImageRequesting
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { makeSelectCurrentAddress } from '../App/selectors';
-import { goTo } from './actions';
+import { goTo, postImageRequest } from './actions';
 import CreateForm from './CreateForm';
 import { createTokenRequest } from './actions';
 
@@ -32,6 +37,7 @@ export class CreateIconPage extends React.Component {
     super(props);
     this.state = {
       payload:{name: "", ipfs_handle: "", age: "", gender: "", tokenType: "IDOL"},
+      image: {},
       errors:{},
       gender: [
         {
@@ -59,6 +65,15 @@ export class CreateIconPage extends React.Component {
         payload:{name: "", ipfs_handle: "", age: "", gender: ""}
       })
       this.goTo();
+    }
+    if(nextProps.imageResponse != this.props.imageResponse && nextProps.imageResponse.size > 0 ) {
+      const { ipfsHash } = nextProps.imageResponse.toJS();
+      this.setState({
+        payload: {
+          ...this.state.payload,
+          ipfs_handle: ipfsHash
+        }
+      })
     }
   }
 
@@ -90,16 +105,31 @@ export class CreateIconPage extends React.Component {
   }
 
   onFormChange = (event, data) => {
+    if(data.name != "ipfs_handle"){
+      this.setState({
+        payload: { 
+          ...this.state.payload,
+          [data.name] : data.value
+        }
+      })
+    }
+  }
+
+  onImageChange = (event) => {
     this.setState({
-      payload: { 
-        ...this.state.payload,
-        [data.name] : data.value
-      }
-    })
+      image: event.target.files
+    });
+  }
+
+  onImageSubmitButtonClicked = (event, data) => {
+    const { image } = this.state;
+    if(image.length == 1){
+      this.props.postImage(image[0]);
+    }
   }
 
   render() {
-    const { gender, payload } = this.state;
+    const { gender, payload, image } = this.state;
     const { currentAddress, isRequesting } = this.props;
     
     return (
@@ -115,11 +145,14 @@ export class CreateIconPage extends React.Component {
         <CreateForm 
           payload ={payload}
           gender={gender} 
+          image = {image}
           currentAddress={currentAddress} 
           goTo={this.goTo}
           onCreateTokenSubmit={this.onCreateTokenSubmit}
+          onImageSubmitButtonClicked={this.onImageSubmitButtonClicked}
           onFormChange = {this.onFormChange}
           isRequesting = {isRequesting}
+          onImageChange = {this.onImageChange}
         />
       </div>
     );
@@ -138,11 +171,14 @@ const mapStateToProps = createStructuredSelector({
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
   successResponse: makeSelectResponse(),
-  currentAddress : makeSelectCurrentAddress()
+  currentAddress : makeSelectCurrentAddress(),
+  imageResponse: makeSelectImageResponse(),
+  imageRequesting: makeSelectImageRequesting(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   createToken : (payload) => dispatch(createTokenRequest(payload)),
+  postImage: (image) => dispatch(postImageRequest(image)),
   goTo : (path) => dispatch(goTo(path)),
 })
 

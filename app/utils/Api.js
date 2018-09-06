@@ -91,7 +91,7 @@ class Api {
         //   multipartData.append('file', document[i]);
         // }
       } else {
-        multipartData.append('file', document);
+        multipartData.append('image', document);
       }
       try {
         const options = {

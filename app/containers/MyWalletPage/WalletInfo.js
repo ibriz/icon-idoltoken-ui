@@ -6,7 +6,7 @@ import defaultIdol from 'assets/default.jpg';
 import IconList from '../../components/IconList';
 
 function WalletInfo(props) {
-  const { walletInfo, onCreateButtonsClick, currentAddress, addresses } = props;
+  const { walletInfo, onCreateButtonsClick, currentAddress, addresses, images } = props;
   return (
     <div className="ui container text" id="content" role="main">
       <br />
@@ -68,7 +68,7 @@ function WalletInfo(props) {
       <a href="http://localhost:8080/iconmain/checkTokenDetails?address=hx65f6e18d378b57612a28f72acb97021eaa82aa5a&amp;tokenType=IDOL&amp;tokenId=cd8cfa02-adca-11e8-b29d-000c29be104e">
         cd8cfa02-adca-11e8-b29d-000c29be104e
         </a> */}
-            <IconList resp={walletInfo} goTo={props.goTo} />
+      <IconList resp={walletInfo} goTo={props.goTo} images={props.images} />
 
     </div >
   );

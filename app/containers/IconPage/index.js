@@ -24,7 +24,9 @@ import {
   makeSelectIconResponse,
   makeSelectError,
   makeSelectIconRequesting,
-  makeSelectSuccess
+  makeSelectSuccess,
+  makeSelectImageRequesting,
+  makeSelectImageResponse
 } from './selectors';
 import { makeSelectCurrentAddress } from '../App/selectors';
 
@@ -32,7 +34,7 @@ import {
   getIconListRequest,
 } from './actions';
 import IconList from '../../components/IconList';
-import { goTo } from '../App/actions';
+import { goTo, fetchImageRequest } from '../App/actions';
 import MostPopular from './MostPopular';
 import RecentlyAdded from './RecentlyAdded';
 
@@ -41,7 +43,8 @@ export class IconPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentAddress:""
+      currentAddress:"",
+      images:{}
     };
   }
 
@@ -61,10 +64,32 @@ export class IconPage extends React.Component {
         this.props.getIconList(currentAddress);
       })
     }
+    if(nextProps.successIconResponse != this.props.successIconResponse && nextProps.successIconResponse.size > 0){
+      let ipfsArr=[];
+      let resp = nextProps.successIconResponse.toJS(),
+          { tokenList } = resp;
+
+      for ( let item in tokenList ){
+        ipfsArr.push(tokenList[item].ipfs_handle);
+      }
+      for ( let item in ipfsArr ){
+        this.props.fetchImage(ipfsArr[item])
+      }
+    }
+    if(this.props.imageResponse !== nextProps.imageResponse && nextProps.imageResponse.size > 0) {
+      const { ipfsHash, fileByte } = nextProps.imageResponse.toJS();
+      this.setState({
+        images:{
+          ...this.state.images,
+          [ipfsHash] : fileByte
+        }
+      })
+    }
+    
   }
 
   render() {
-    const { } = this.state;
+    const { images } = this.state;
     const {
       isRequesting,
       successIconResponse,
@@ -90,13 +115,21 @@ export class IconPage extends React.Component {
             <span className="caption">who is ordering services listed in contract</span>
             <br />
             <br />
-            <IconList resp={successIconResponse} goTo={this.goTo} />
+            <IconList 
+              resp={successIconResponse}
+              goTo={this.goTo}
+              images={images} 
+            />
             <br />
             <br />
             <br />
             <Grid columns="2">
-              <MostPopular />
-              <RecentlyAdded />
+              <MostPopular
+                images={images} 
+              />
+              <RecentlyAdded
+                images={images} 
+                />
             </Grid>
           </div>
         }
@@ -119,11 +152,14 @@ const mapStateToProps = createStructuredSelector({
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
   successIconResponse: makeSelectIconResponse(),
-  currentAddress : makeSelectCurrentAddress()
+  currentAddress : makeSelectCurrentAddress(),
+  imageRequesting :makeSelectImageRequesting(),
+  imageResponse :makeSelectImageResponse()
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getIconList: (address) => dispatch(getIconListRequest(address)),
+  fetchImage: (ipfs) => dispatch(fetchImageRequest(ipfs)),
   goTo: (id) => dispatch(goTo(id))
 })
 

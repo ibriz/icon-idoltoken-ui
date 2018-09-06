@@ -15,6 +15,7 @@ function* createTokenService(action) {
             `${API_BASE}iconmain/createIdolToken?address=${address}&tokenType=${tokenType}&name=${name}&age=${age}&gender=${gender}&ipfs_handle=${ipfs_handle}`,
             actions.createTokenSuccess,
             actions.createTokenFailure,
+
         )
     );
 }
@@ -22,8 +23,23 @@ function* createTokenService(action) {
 function* goto(action) {
   yield put(push(action.id));
 }
+
+function* postImageService(action) {
+    const {payload} = action;
+    yield fork(
+        Api.multipartPost(
+            `${API_BASE}iconmain/uploadImage`,
+            actions.postImageSuccess,
+            actions.postImageFailure,
+            payload,
+            payload
+        )
+    );
+}
+
 // Individual exports for testing
 export default function* defaultSaga() {
     yield takeLatest(types.CREATE_TOKEN_REQUEST, createTokenService);
+    yield takeLatest(types.POST_IMAGE_REQUEST, postImageService);
     yield takeLatest(types.GOTO, goto);
 }

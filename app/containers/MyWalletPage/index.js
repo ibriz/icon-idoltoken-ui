@@ -18,7 +18,7 @@ import reducer from './reducer';
 import saga from './saga';
 // import makeSelectMyWalletPage from './selectors';
 import {
-  makeSelectIconRequesting, makeSelectError, makeSelectIconResponse, makeSelectSuccess
+  makeSelectIconRequesting, makeSelectError, makeSelectIconResponse, makeSelectSuccess, makeSelectImageResponse
 } from './selectors';
 import messages from './messages';
 import WalletInfo from './WalletInfo';
@@ -28,7 +28,7 @@ import {
   getIconListRequest,
 } from './actions';
 import { Icon } from 'semantic-ui-react';
-import { goTo } from '../App/actions';
+import { goTo, fetchImageRequest } from '../App/actions';
 
 /* eslint-disable react/prefer-stateless-function */
 export class MyWalletPage extends React.Component {
@@ -36,6 +36,7 @@ export class MyWalletPage extends React.Component {
     super(props);
     this.state = {
       accountInfo:{},
+      images:{},
       currentAddress:""
     }
   }
@@ -59,10 +60,31 @@ export class MyWalletPage extends React.Component {
         this.props.getIconList(currentAddress);
       })
     }
+    if(nextProps.successIconResponse != this.props.successIconResponse && nextProps.successIconResponse.size > 0){
+      let ipfsArr=[];
+      let resp = nextProps.successIconResponse.toJS(),
+          { tokenList } = resp;
+
+      for ( let item in tokenList ){
+        ipfsArr.push(tokenList[item].ipfs_handle);
+      }
+      for ( let item in ipfsArr ){
+        this.props.fetchImage(ipfsArr[item])
+      }
+    }
+    if(this.props.imageResponse !== nextProps.imageResponse && nextProps.imageResponse.size > 0) {
+      const { ipfsHash, fileByte } = nextProps.imageResponse.toJS();
+      this.setState({
+        images:{
+          ...this.state.images,
+          [ipfsHash] : fileByte
+        }
+      })
+    }
   }
 
   render() {
-    const {currentAddress} = this.state;
+    const { currentAddress, images } = this.state;
     const {
       addresses,
       isRequesting,
@@ -84,7 +106,8 @@ export class MyWalletPage extends React.Component {
             goTo = {this.goTo}
             addresses = {addresses}
             onCreateButtonsClick = {this.onCreateButtonsClick}  
-          />
+            images={images} 
+            />
         }
       </div>
     );
@@ -112,11 +135,13 @@ const mapStateToProps = createStructuredSelector({
   errorResponse: makeSelectError(),
   successIconResponse: makeSelectIconResponse(),
   currentAddress: makeSelectCurrentAddress(),
-  addresses : makeSelectAddresses()
+  addresses : makeSelectAddresses(),
+  imageResponse :makeSelectImageResponse()
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getIconList: (address) => dispatch(getIconListRequest(address)),
+  fetchImage: (ipfs) => dispatch(fetchImageRequest(ipfs)),
   goTo: (id) => dispatch(goTo(id)),
 })
 
