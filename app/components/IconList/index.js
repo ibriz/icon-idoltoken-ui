@@ -14,7 +14,7 @@ function IconList(props) {
 
 const iconsList = (tokenList, goTo, images, height) => {
   console.log('images',images);
-  
+
   return (
       <Grid stackable doubling columns="4">
         {tokenList && tokenList.map((item, index) => {
@@ -34,16 +34,16 @@ const IconCard = (item, goTo, images, height= '100px') => (
   <Grid.Column key={item.tokenId} onClick={() => goTo(item.tokenId)}>
     <Card>
       {images && Object.keys(images).includes(item.ipfs_handle) && images[item.ipfs_handle] != '' &&
-        <img src={`data:image/jpg;base64,${images[item.ipfs_handle]}`} style={{ height: height }} />
+        <img src={`data:image/jpg;base64,${images[item.ipfs_handle]}`} style={{ height: height, 'object-fit': 'cover'}} />
       }
       {images && Object.keys(images).includes(item.ipfs_handle) && images[item.ipfs_handle] == '' &&
         <Image src={defaultIdol} />
       }
       <br /><Card.Content>
         <Card.Header><b>{item.name}</b></Card.Header>
-        <label>Age:</label>{item.age}<br />
-        <label>Gender:</label>{item.gender}<br />
-        <label>Price:</label>{item.price || '0'}<br />
+        <label><b>Age: </b></label>{item.age}<br />
+        <label><b>Gender: </b></label>{item.gender}<br />
+        <label><b>Price: </b></label>{item.price || '0'} ICX<br />
       </Card.Content>
 
     </Card>

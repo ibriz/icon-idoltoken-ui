@@ -85,7 +85,7 @@ export class IconDetailPage extends React.Component {
   renderCeleb = (item) => {
     const { tokenId, images } = this.state;
     console.log('images',images);
-    
+
       return (
         <div className="ui container text">
           <br />
@@ -128,11 +128,11 @@ export class IconDetailPage extends React.Component {
               </Table.Row>
               <Table.Row>
                 <Table.Cell><Label ribbon>Price:</Label> </Table.Cell>
-                <Table.Cell>{item.price}</Table.Cell>
+                <Table.Cell>{item.price}  ICX</Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
-          {/*               
+          {/*
           <label class="idolLabel">Ipfs Handle:</label>0xabcde12346<br />
           <label class="idolLabel">Token Owner:</label>hx65f6e18d378b57612a28f72acb97021eaa82aa5a<br /> */}
 
