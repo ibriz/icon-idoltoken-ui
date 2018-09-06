@@ -3,7 +3,7 @@ import {Grid} from 'semantic-ui-react';
 import defaultIdol from 'assets/default.jpg';
 import ariana from 'assets/adriana_grande.png';
 import selena from 'assets/salena_gomez.jpg';
-import taylor from 'assets/taylor_swift.png';
+import taylor from 'assets/taylor_swift.jpg';
 
 function MostPopular(props) {
   return (
