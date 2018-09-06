@@ -11,23 +11,7 @@ function RecentlyAdded (props) {
   return (
     <Grid.Column>
       <h2>Recently Added</h2>
-      <div className="media">
-        <img style={{width: '60px'}} src={taylor}/>
-        <div className="media-content">`
-          <h3 className="media-content-text" >Taylor Swift</h3>
-          <button className="getBtn">GET</button>
-        </div>
-        <div className="clear"></div>
-      </div>
 
-      <div className="media">
-        <img style={{width: '60px'}} src={ariana}/>
-        <div className="media-content">
-          <h3 className="media-content-text" >Ariana Grande</h3>
-          <button className="getBtn">GET</button>
-        </div>
-        <div className="clear"></div>
-      </div>
       <div className="media">
         <img style={{width: '60px'}} src={bobice}/>
         <div className="media-content">
