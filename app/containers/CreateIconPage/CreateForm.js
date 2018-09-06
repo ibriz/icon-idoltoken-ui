@@ -2,9 +2,9 @@ import React from "react";
 import { Form, Input, Dropdown, Button } from "semantic-ui-react";
 
 function CreateForm (props) {
-  const { 
-    currentAddress, 
-    gender, 
+  const {
+    currentAddress,
+    gender,
     goTo,
     onCreateTokenSubmit,
     onFormChange,
@@ -30,8 +30,8 @@ function CreateForm (props) {
         <p>IDOL</p>
       </Form.Field>
       <Form.Field>
-        <label>First Name:</label>
-        <Input placeholder="First Name" type="text" name="name" onChange={onFormChange} value={payload.name || ''} fluid />
+        <label>Name:</label>
+        <Input placeholder="Name" type="text" name="name" onChange={onFormChange} value={payload.name || ''} fluid />
       </Form.Field>
       <Form.Field>
         <label>Age:</label>
@@ -51,8 +51,8 @@ function CreateForm (props) {
         <Input placeholder='IPFS Handle' type="text" name="ipfs_handle" onChange={onFormChange} value={payload.ipfs_handle || ''} fluid  disabled={true}/>
       </Form.Field>
       <Button type='button' onClick={goTo} >Back</Button>
-      <Button primary type='submit' 
-        onClick={onCreateTokenSubmit} 
+      <Button primary type='submit'
+        onClick={onCreateTokenSubmit}
         disabled={
           !payload.name ||
           !payload.age ||
