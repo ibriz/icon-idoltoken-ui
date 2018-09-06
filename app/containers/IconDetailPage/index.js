@@ -104,9 +104,15 @@ export class IconDetailPage extends React.Component {
             <Table.Body>
               <Table.Row>
                 <Table.Cell>
-                  <Label ribbon><label className="idolLabel">Token Address:</label></Label>
+                  <Label ribbon><label >Owner Address:</label></Label>
                 </Table.Cell>
                 <Table.Cell>{item.address}</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  <Label ribbon><label >Token Address:</label></Label>
+                </Table.Cell>
+                <Table.Cell>{item.tokenId}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell><Label ribbon>Age:</Label></Table.Cell>
@@ -130,15 +136,15 @@ export class IconDetailPage extends React.Component {
           <label class="idolLabel">Ipfs Handle:</label>0xabcde12346<br />
           <label class="idolLabel">Token Owner:</label>hx65f6e18d378b57612a28f72acb97021eaa82aa5a<br /> */}
 
-          <Button primary onClick={()=> this.onBuyIcon(item.ipfs_handle)}>
+          <Button primary onClick={()=> this.onBuyIcon(item.tokenId)}>
             Transfer
           </Button>
         </div>
       );
   }
 
-  onBuyIcon = (ipfs_handle) => {
-    this.props.goTo(`/transfer/token/${ipfs_handle}`);
+  onBuyIcon = (tokenId) => {
+    this.props.goTo(`/transfer/token/${tokenId}`);
   }
 
 }
