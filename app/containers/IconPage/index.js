@@ -96,7 +96,7 @@ export class IconPage extends React.Component {
         }
       })
     }
-    
+
   }
 
   render() {
@@ -123,13 +123,12 @@ export class IconPage extends React.Component {
             <h1>
               Featured Idols
               </h1>
-            <span className="caption">who is ordering services listed in contract</span>
             <br />
             <br />
-            <IconList 
+            <IconList
               resp={successIconResponse}
               goTo={this.goTo}
-              images={images} 
+              images={images}
               height = '165px'
             />
             <br />
@@ -137,10 +136,10 @@ export class IconPage extends React.Component {
             <br />
             <Grid columns="2">
               <MostPopular
-                images={images} 
+                images={images}
               />
               <RecentlyAdded
-                images={images} 
+                images={images}
                 />
             </Grid>
           </div>
