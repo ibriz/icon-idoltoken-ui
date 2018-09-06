@@ -68,6 +68,7 @@ const App = props => {
         <Route path="/icon/detail/:id" component={IconDetailPage} />
         <Route path="/token/create" component={CreateIconPage} />
         <Route exact path="/wallet" component={MyWalletPage} />
+        <Route path="/transfer/token/:tokenId" component={TransferTokenPage} />
         <Route path="/transfer/token" component={TransferTokenPage} />
 
         <GuestRoute

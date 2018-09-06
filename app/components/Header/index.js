@@ -2,6 +2,8 @@ import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import Icon from 'assets/img/icon.svg';
 import user from 'assets/img/user.jpg';
+import defaultIcon from 'assets/default.jpg';
+
 import Link from "react-router-dom/Link"
 
 import { makeSelectAddresses } from '../../containers/App/selectors';
@@ -58,7 +60,7 @@ class Header extends React.Component {
             </Dropdown.Menu>
           </Dropdown>
 
-          <Link to="/wallet"> <img src={user} style={{ width: '40px', height: '40px', position: 'relative', top: '5px' }} />
+          <Link to="/wallet"> <img src={defaultIcon} style={{ width: '40px', height: '40px', position: 'relative', top: '5px' }} />
           </Link>
         </div>
       </header >

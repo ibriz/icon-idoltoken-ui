@@ -11,8 +11,8 @@ function MostPopular(props) {
       <h2>Most Popular Idols</h2>
       <div className="media">
         <img style={{width: '60px'}} src={taylor}/>
-        <div className="media-content">`
-          <h3>Taylor Swift</h3>
+        <div className="media-content">
+          <h3 className="media-content-text" >Taylor Swift</h3>
           <button className="getBtn">GET</button>
         </div>
         <div className="clear"></div>
@@ -21,7 +21,7 @@ function MostPopular(props) {
       <div className="media">
         <img style={{width: '60px'}} src={ariana}/>
         <div className="media-content">
-          <h3>Ariana Grande</h3>
+          <h3 className="media-content-text" >Ariana Grande</h3>
           <button className="getBtn">GET</button>
         </div>
         <div className="clear"></div>
@@ -30,7 +30,7 @@ function MostPopular(props) {
       <div className="media">
         <img style={{width: '60px'}} src={selena}/>
         <div className="media-content">
-          <h3>Selena Gomez</h3>
+          <h3 className="media-content-text" >Selena Gomez</h3>
           <button className="getBtn">GET</button>
         </div>
         <div className="clear"></div>

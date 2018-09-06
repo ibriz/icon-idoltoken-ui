@@ -61,15 +61,19 @@ export class MyWalletPage extends React.Component {
       })
     }
     if(nextProps.successIconResponse != this.props.successIconResponse && nextProps.successIconResponse.size > 0){
-      let ipfsArr=[];
+      let ipfsArr={};
       let resp = nextProps.successIconResponse.toJS(),
           { tokenList } = resp;
 
       for ( let item in tokenList ){
-        ipfsArr.push(tokenList[item].ipfs_handle);
+        ipfsArr[tokenList[item].ipfs_handle] = '';
       }
-      for ( let item in ipfsArr ){
-        this.props.fetchImage(ipfsArr[item])
+      if(Object.keys(ipfsArr).length > 0){
+        this.setState({
+          images: ipfsArr
+        },()=>{
+          this.props.fetchImage(Object.keys(ipfsArr)[0]);
+        })
       }
     }
     if(this.props.imageResponse !== nextProps.imageResponse && nextProps.imageResponse.size > 0) {
@@ -78,6 +82,13 @@ export class MyWalletPage extends React.Component {
         images:{
           ...this.state.images,
           [ipfsHash] : fileByte
+        }
+      },()=>{
+        for (let hash in this.state.images){
+          if(this.state.images[hash] == ''){
+            this.props.fetchImage(hash);
+            return;
+          }
         }
       })
     }

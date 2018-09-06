@@ -47,7 +47,7 @@ function CreateForm (props) {
         <Button type='button' onClick={onImageSubmitButtonClicked} disabled={image.length != 1}>Upload Image</Button>
       </Form.Field>
       <Form.Field>
-        <label>IPFS Handle:</label>
+        <label className="only-faded">IPFS Handle:</label>
         <Input placeholder='IPFS Handle' type="text" name="ipfs_handle" onChange={onFormChange} value={payload.ipfs_handle || ''} fluid  disabled={true}/>
       </Form.Field>
       <Button type='button' onClick={goTo} >Back</Button>

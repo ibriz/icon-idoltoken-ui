@@ -8,7 +8,8 @@ function TransferTokenForm (props) {
     goTo, 
     formData, 
     isRequesting,
-    currentAddress
+    currentAddress,
+    addressObject
   } = props;
   return (
     <Form>
@@ -23,7 +24,7 @@ function TransferTokenForm (props) {
       </Form.Field>
       <Form.Field>
         <label>To Address:</label>
-        <Input placeholder="To Address" type="text" 
+        <Dropdown search selection options={addressObject} placeholder="To Address" 
           value={formData.toAddress || ''} onChange={onTransferTokenChange} name="toAddress" fluid />
       </Form.Field>
       <Form.Field>

@@ -8,7 +8,7 @@ import {makeSelectToken} from 'containers/App/selectors';
 
 import * as types from './constants';
 import * as actions from './actions';
-import { API_BASE } from '../App/constants';
+import { API_BASE, FETCH_IMAGE_REQUEST } from '../App/constants';
 
 function* getIconDetailService(action) {
     yield fork(
@@ -20,7 +20,17 @@ function* getIconDetailService(action) {
     );
 }
 
+function* fetchImageRequest(action) {
+    yield fork(
+        Api.get(
+            `${API_BASE}iconmain/showImage?hash=${action.payload}`,
+            actions.fetchImageSuccess,
+            actions.fetchImageFailure
+        )
+    );
+}
 // Individual exports for testing
 export default function* defaultSaga() {
     yield takeLatest(types.GET_ICON_DETAIL_REQUEST, getIconDetailService);
+    yield takeLatest(FETCH_IMAGE_REQUEST, fetchImageRequest);
 }

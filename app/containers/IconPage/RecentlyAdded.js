@@ -11,7 +11,7 @@ function RecentlyAdded (props) {
       <div className="media">
         <img style={{width: '60px'}} src={taylor}/>
         <div className="media-content">`
-          <h3>Taylor Swift</h3>
+          <h3 className="media-content-text" >Taylor Swift</h3>
           <button className="getBtn">GET</button>
         </div>
         <div className="clear"></div>
@@ -20,7 +20,7 @@ function RecentlyAdded (props) {
       <div className="media">
         <img style={{width: '60px'}} src={ariana}/>
         <div className="media-content">
-          <h3>Ariana Grande</h3>
+          <h3 className="media-content-text" >Ariana Grande</h3>
           <button className="getBtn">GET</button>
         </div>
         <div className="clear"></div>

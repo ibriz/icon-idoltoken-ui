@@ -23,7 +23,7 @@ import saga from './saga';
 import messages from './messages';
 import TransferTokenForm from './TransferTokenForm';
 import { goTo } from '../App/actions';
-import { makeSelectCurrentAddress } from '../App/selectors';
+import { makeSelectCurrentAddress, makeSelectAddresses } from '../App/selectors';
 import { tokenTransferRequest } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -46,6 +46,14 @@ export class TransferTokenPage extends React.Component {
       ]
     };
   }
+  componentDidMount(){
+    this.setState({
+      formData:{
+        ...this.state.formData,
+        tokenId: this.props.match.params.tokenId ? this.props.match.params.tokenId : ''
+      }
+    })
+  }
   
   componentWillReceiveProps(nextProps) {
     if(this.props.currentAddress != nextProps.currentAddress && nextProps.currentAddress != '') {
@@ -60,7 +68,13 @@ export class TransferTokenPage extends React.Component {
 
   render() {
     const { tokenTypes, formData } = this.state;
-    const { isRequesting, currentAddress } = this.props;
+    const { isRequesting, currentAddress, addresses } = this.props;
+    let addressObject = [],
+        simpleAddrsess = addresses.toJS();
+    for(let i in simpleAddrsess){
+      addressObject.push({key:simpleAddrsess[i]+"_"+i, text:simpleAddrsess[i], value:simpleAddrsess[i]})
+    }
+     
     return (
       <div className="ui container text">
         <Helmet>
@@ -78,6 +92,7 @@ export class TransferTokenPage extends React.Component {
           isRequesting ={isRequesting}
           onTransferTokenChange = {this.onTransferTokenChange}
           currentAddress={currentAddress}
+          addressObject= {addressObject}
         />
       </div>
     );
@@ -118,6 +133,7 @@ const mapStateToProps = createStructuredSelector({
   errorResponse: makeSelectError(),
   successResponse: makeSelectResponse(),
   currentAddress: makeSelectCurrentAddress(),
+  addresses: makeSelectAddresses()
 });
 
 const mapDispatchToProps = (dispatch) => ({
