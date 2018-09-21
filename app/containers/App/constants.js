@@ -51,7 +51,7 @@ export const UPDATE_FIRST_LOAD_SUCCESS =
 export const API_BASE =
   process.env.NODE_ENV === 'production'
     ? 'https://www.techastep.com/api/'
-    : 'http://e15c1505.ngrok.io/';
+    : 'http://localhost:8080/';
 
 // For file upload
 export const DOCUMENT_URL =
