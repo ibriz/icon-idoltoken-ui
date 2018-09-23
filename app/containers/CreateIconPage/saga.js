@@ -11,12 +11,13 @@ import { API_BASE } from '../App/constants';
 function* createTokenService(action) {
     const {payload:{address, name, ipfs_handle, age, gender, tokenType}} = action;
     yield fork(
-        Api.get(
-            `${API_BASE}iconmain/createIdolToken?address=${address}&tokenType=${tokenType}&name=${name}&age=${age}&gender=${gender}&ipfs_handle=${ipfs_handle}`,
-            actions.createTokenSuccess,
-            actions.createTokenFailure,
-
-        )
+      Api.post(
+        `${API_BASE}iconmain/createIdolToken`,
+        actions.createTokenSuccess,
+        actions.createTokenFailure,
+        action,
+        action
+      ),
     );
 }
 

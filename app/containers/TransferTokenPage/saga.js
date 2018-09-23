@@ -21,11 +21,11 @@ function* tokenTransferService(action) {
     const {payload, payload:{fromAddress,tokenType,toAddress,tokenId}} = action;
     const successWatcher = yield fork(redirectOnSuccess);
     yield fork(
-        Api.get(
-            `${API_BASE}iconmain/transfer?fromAddress=${fromAddress}&toAddress=${toAddress}&tokenType=${tokenType}&tokenId=${tokenId}`,
+        Api.post(
+            `${API_BASE}iconmain/transfer`,
             actions.tokenTransferSuccess,
             actions.tokenTransferFailure,
-            payload,
+            action,
             token
         )
     );
