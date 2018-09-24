@@ -15,8 +15,8 @@ function* createTokenService(action) {
         `${API_BASE}iconmain/createIdolToken`,
         actions.createTokenSuccess,
         actions.createTokenFailure,
-        action,
-        action
+        action['payload'],
+        action['payload']
       ),
     );
 }

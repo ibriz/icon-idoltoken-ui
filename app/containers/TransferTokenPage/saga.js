@@ -25,7 +25,7 @@ function* tokenTransferService(action) {
             `${API_BASE}iconmain/transfer`,
             actions.tokenTransferSuccess,
             actions.tokenTransferFailure,
-            action,
+            action['payload'],
             token
         )
     );
