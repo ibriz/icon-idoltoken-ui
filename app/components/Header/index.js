@@ -2,6 +2,8 @@ import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import Icon from 'assets/img/icon.svg';
 import user from 'assets/img/user.jpg';
+import defaultIcon from 'assets/default.jpg';
+
 import Link from "react-router-dom/Link"
 
 import { makeSelectAddresses } from '../../containers/App/selectors';
@@ -33,7 +35,6 @@ class Header extends React.Component {
           <Dropdown style={{ padding: '20px 20px 0' }} text='Accounts'>
             <Dropdown.Menu>
               { addresses && addresses.map((item, index)=>{
-                console.log(item)
                 return (
                   <Dropdown.Item key={`${index}_${item}`} onClick={() => this.setCurrentAddress(item)}>
                     {/* <Link to="/"> */}
@@ -47,13 +48,19 @@ class Header extends React.Component {
 
           <Dropdown style={{ padding: '20px 20px 0' }} text='About'>
             <Dropdown.Menu>
-              <Dropdown.Item text='ICON Foundation' />
-              <Dropdown.Item text='ICON Token(ICX)' />
-              <Dropdown.Item text='Sample ICON' />
+              <Dropdown.Item>
+                <a href="https://icon.foundation/?lang=en" target="_blank">ICON Foundation</a>
+              </Dropdown.Item>
+
+              <Dropdown.Item>
+                <a href="https://tracker.icon.foundation/" target="_blank">ICON Token(ICX)</a>
+              </Dropdown.Item>
+
+              {/* <Dropdown.Item text='Sample ICON' /> */}
             </Dropdown.Menu>
           </Dropdown>
 
-          <Link to="/wallet"> <img src={user} style={{ width: '40px', height: '40px', position: 'relative', top: '5px' }} />
+          <Link to="/wallet"> <img src={defaultIcon} style={{ width: '40px', height: '40px', position: 'relative', top: '5px' }} />
           </Link>
         </div>
       </header >

@@ -118,3 +118,5 @@ export const updateFirstLoadSuccess = action(types.UPDATE_FIRST_LOAD_SUCCESS);
 export const setCurrentAddress = action(types.SET_CURRENT_ADDRESS, 'address');
 
 export const goTo = action(types.GO_TO, 'id');
+
+export const fetchImageRequest = action(types.FETCH_IMAGE_REQUEST,'payload');

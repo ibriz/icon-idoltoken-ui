@@ -14,9 +14,14 @@ const makeSelectIconResponse = () => createSelector(selectDomain, (state) => sta
 const makeSelectError = () => createSelector(selectDomain, (state) => state.get('error'));
 const makeSelectIconRequesting = () => createSelector(selectDomain, (state) => state.get('iconRequesting'));
 
+const makeSelectImageRequesting = () => createSelector(selectDomain, (state) => state.get('imageRequesting'));
+const makeSelectImageResponse = () => createSelector(selectDomain, (state) => state.get('imageResponse'));
+
 export {
   makeSelectSuccess,
   makeSelectIconResponse,
   makeSelectIconRequesting,
   makeSelectError,
+  makeSelectImageRequesting,
+  makeSelectImageResponse
 };

@@ -17,14 +17,16 @@ import reducer from './reducer';
 import saga from './saga';
 
 
-import { Label, Icon } from 'semantic-ui-react';
+import { Icon, Grid } from 'semantic-ui-react';
 import loader from 'assets/img/loader.svg';
 
 import {
   makeSelectIconResponse,
   makeSelectError,
   makeSelectIconRequesting,
-  makeSelectSuccess
+  makeSelectSuccess,
+  makeSelectImageRequesting,
+  makeSelectImageResponse
 } from './selectors';
 import { makeSelectCurrentAddress } from '../App/selectors';
 
@@ -32,14 +34,17 @@ import {
   getIconListRequest,
 } from './actions';
 import IconList from '../../components/IconList';
-import { goTo } from '../App/actions';
+import { goTo, fetchImageRequest } from '../App/actions';
+import MostPopular from './MostPopular';
+import RecentlyAdded from './RecentlyAdded';
 
 /* eslint-disable react/prefer-stateless-function */
 export class IconPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentAddress:""
+      currentAddress:"",
+      images:{}
     };
   }
 
@@ -59,10 +64,43 @@ export class IconPage extends React.Component {
         this.props.getIconList(currentAddress);
       })
     }
+    if(nextProps.successIconResponse != this.props.successIconResponse && nextProps.successIconResponse.size > 0){
+      let ipfsArr={};
+      let resp = nextProps.successIconResponse.toJS(),
+          { tokenList } = resp;
+
+      for ( let item in tokenList ){
+        ipfsArr[tokenList[item].ipfs_handle] = '';
+      }
+      if(Object.keys(ipfsArr).length > 0){
+        this.setState({
+          images: ipfsArr
+        },()=>{
+          this.props.fetchImage(Object.keys(ipfsArr)[0]);
+        })
+      }
+    }
+    if(this.props.imageResponse !== nextProps.imageResponse && nextProps.imageResponse.size > 0) {
+      const { ipfsHash, fileByte } = nextProps.imageResponse.toJS();
+      this.setState({
+        images:{
+          ...this.state.images,
+          [ipfsHash] : fileByte
+        }
+      },()=>{
+        for (let hash in this.state.images){
+          if(this.state.images[hash] == ''){
+            this.props.fetchImage(hash);
+            return;
+          }
+        }
+      })
+    }
+
   }
 
   render() {
-    const { } = this.state;
+    const { images } = this.state;
     const {
       isRequesting,
       successIconResponse,
@@ -79,18 +117,32 @@ export class IconPage extends React.Component {
         }
         {!isRequesting &&
           <div style={{ textAlign: 'center' }}>
-          <br />
-          <br />
-          <br />
-          <h1>
-            Featured Idols
-            </h1>
-          <span className="caption">who is ordering services listed in contract</span>
-          <br />
-          <br />
-            <IconList resp={successIconResponse} goTo={this.goTo} />
+            <br />
+            <br />
+            <br />
+            <h1>
+              Featured Idols
+              </h1>
+            <br />
+            <br />
+            <IconList
+              resp={successIconResponse}
+              goTo={this.goTo}
+              images={images}
+              height = '165px'
+            />
+            <br />
+            <br />
+            <br />
+            <Grid columns="2">
+              <MostPopular
+                images={images}
+              />
+              <RecentlyAdded
+                images={images}
+                />
+            </Grid>
           </div>
-
         }
       </div>
     );
@@ -111,11 +163,14 @@ const mapStateToProps = createStructuredSelector({
   isSuccess: makeSelectSuccess(),
   errorResponse: makeSelectError(),
   successIconResponse: makeSelectIconResponse(),
-  currentAddress : makeSelectCurrentAddress()
+  currentAddress : makeSelectCurrentAddress(),
+  imageRequesting :makeSelectImageRequesting(),
+  imageResponse :makeSelectImageResponse()
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getIconList: (address) => dispatch(getIconListRequest(address)),
+  fetchImage: (ipfs) => dispatch(fetchImageRequest(ipfs)),
   goTo: (id) => dispatch(goTo(id))
 })
 

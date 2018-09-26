@@ -17,14 +17,27 @@ const initialState = fromJS({
 
 function transferTokenPageReducer(state = initialState, action = {type: ''}) {
   switch (action.type) {
-    case types.DEFAULT_ACTION:
-      return state;
-    case types.DEFAULT_ACTION_REQUEST:
-      return state;
-    case types.DEFAULT_ACTION_SUCCESS:
-      return state;
-    case types.DEFAULT_ACTION_FAILURE:
-      return state;
+    case types.TOKEN_TRANSFER_REQUEST:
+      return state.merge({
+        requesting: true,
+        response: {},
+        error:'',
+        success: false
+      });
+    case types.TOKEN_TRANSFER_SUCCESS:
+      return state.merge({
+        requesting: false,
+        response: fromJS(action.response),
+        error:'',
+        success: true
+      });
+    case types.TOKEN_TRANSFER_FAILURE:
+      return state.merge({
+        requesting: false,
+        response: {},
+        error:'Token transfer failed',
+        success: false
+      });
     default:
       return state;
   }

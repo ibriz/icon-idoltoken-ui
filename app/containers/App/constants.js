@@ -41,6 +41,8 @@ export const POST_INTRO_TOOL_FAILURE = 'project/App/POST_INTRO_TOOL_FAILURE';
 
 export const SET_CURRENT_ADDRESS = 'project/App/SET_CURRENT_ADDRESS';
 
+export const FETCH_IMAGE_REQUEST = 'project/App/FETCH_IMAGE_REQUEST';
+
 export const UPDATE_FIRST_LOAD_REQUEST =
   'project/App/UPDATE_FIRST_LOAD_REQUEST';
 export const UPDATE_FIRST_LOAD_SUCCESS =
@@ -49,7 +51,7 @@ export const UPDATE_FIRST_LOAD_SUCCESS =
 export const API_BASE =
   process.env.NODE_ENV === 'production'
     ? 'https://www.techastep.com/api/'
-    : 'http://d65f3234.ngrok.io/';
+    : 'http://localhost:8080/';
 
 // For file upload
 export const DOCUMENT_URL =

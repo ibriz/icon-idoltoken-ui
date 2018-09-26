@@ -18,6 +18,7 @@ import createHistory from 'history/createBrowserHistory';
 
 // Import root app
 import App from 'containers/App';
+import 'app.css';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';

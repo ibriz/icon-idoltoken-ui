@@ -18,17 +18,13 @@ import { createStructuredSelector } from 'reselect';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import Toaster from 'components/Toaster';
-import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import LoginPage from '../LoginPage/Loadable';
-import AdminDashboard from '../Dashboard/Admin';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import GuestRoute from 'components/Routes/GuestRoute';
 import UserRoute from 'components/Routes/UserRoute';
 import IconPage from 'containers/IconPage/Loadable';
 import IconDetailPage from 'containers/IconDetailPage/Loadable';
-import UserDetailPage from 'containers/UserDetailPage/Loadable';
 import CreateIconPage from 'containers/CreateIconPage/Loadable';
 import MyWalletPage from 'containers/MyWalletPage/Loadable';
 import TransferTokenPage from 'containers/TransferTokenPage/Loadable';
@@ -68,19 +64,9 @@ const App = props => {
         <Route path="/icon/detail/:id" component={IconDetailPage} />
         <Route path="/token/create" component={CreateIconPage} />
         <Route exact path="/wallet" component={MyWalletPage} />
+        <Route path="/transfer/token/:tokenId" component={TransferTokenPage} />
         <Route path="/transfer/token" component={TransferTokenPage} />
 
-        <GuestRoute
-          exact
-          location={location}
-          path="/login"
-          component={LoginPage}
-        />
-        <UserRoute
-          location={location}
-          path="/admin/dashboard"
-          component={AdminDashboard}
-        />
         <Route path="" component={NotFoundPage} />
       </Switch>
       <Footer />

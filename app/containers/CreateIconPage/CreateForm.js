@@ -2,18 +2,19 @@ import React from "react";
 import { Form, Input, Dropdown, Button } from "semantic-ui-react";
 
 function CreateForm (props) {
-  const { 
-    currentAddress, 
-    gender, 
+  const {
+    currentAddress,
+    gender,
     goTo,
     onCreateTokenSubmit,
     onFormChange,
     payload,
-    isRequesting
+    isRequesting,
+    onImageChange,
+    onImageSubmitButtonClicked,
+    image
   } = props;
 
-  console.log(isRequesting);
-  
   return(
     <Form>
       <Form.Field>
@@ -29,8 +30,8 @@ function CreateForm (props) {
         <p>IDOL</p>
       </Form.Field>
       <Form.Field>
-        <label>First Name:</label>
-        <Input placeholder="First Name" type="text" name="name" onChange={onFormChange} value={payload.name || ''} fluid />
+        <label>Name:</label>
+        <Input placeholder="Name" type="text" name="name" onChange={onFormChange} value={payload.name || ''} fluid />
       </Form.Field>
       <Form.Field>
         <label>Age:</label>
@@ -41,12 +42,17 @@ function CreateForm (props) {
         <Dropdown search selection options={gender} placeholder="Select Gender" name="gender" onChange={onFormChange} value={payload.gender || ''} fluid />
       </Form.Field>
       <Form.Field>
-        <label>IPFS Handle:</label>
-        <Input placeholder='IPFS Handle' type="text" name="ipfs_handle" onChange={onFormChange} value={payload.ipfs_handle || ''} fluid />
+        <label>Idol Image:</label>
+        <input placeholder='Idol Image' type="file" name="image" onChange={onImageChange} />
+        <Button type='button' onClick={onImageSubmitButtonClicked} disabled={image.length != 1}>Upload Image</Button>
       </Form.Field>
-      <Button type='button' onClick={goTo}>Back</Button>
-      <Button primary type='submit' 
-        onClick={onCreateTokenSubmit} 
+      <Form.Field>
+        <label className="only-faded">IPFS Handle:</label>
+        <Input placeholder='IPFS Handle' type="text" name="ipfs_handle" onChange={onFormChange} value={payload.ipfs_handle || ''} fluid  disabled={true}/>
+      </Form.Field>
+      <Button type='button' onClick={goTo} >Back</Button>
+      <Button primary type='submit'
+        onClick={onCreateTokenSubmit}
         disabled={
           !payload.name ||
           !payload.age ||

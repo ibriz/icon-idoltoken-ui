@@ -8,31 +8,32 @@ import {makeSelectToken} from 'containers/App/selectors';
 
 import * as types from './constants';
 import * as actions from './actions';
+import { API_BASE } from '../App/constants';
 
 function* redirectOnSuccess() {
-    yield take(types.DEFAULT_ACTION);
+    yield take(types.TOKEN_TRANSFER_SUCCESS);
     //executed on successful action
-    yield put(push("/next-route"));
+    yield put(push("/wallet"));
 }
 
-function* defaultActionService(action) {
+function* tokenTransferService(action) {
     const token = yield select(makeSelectToken());
-    const {payload} = action;
+    const {payload, payload:{fromAddress,tokenType,toAddress,tokenId}} = action;
     const successWatcher = yield fork(redirectOnSuccess);
     yield fork(
         Api.post(
-            `api/some-api-url`,
-            actions.defaultActionSuccess,
-            actions.defaultActionFailure,
-            {some: 'data'},
+            `${API_BASE}iconmain/transfer`,
+            actions.tokenTransferSuccess,
+            actions.tokenTransferFailure,
+            action['payload'],
             token
         )
     );
-    yield take([LOCATION_CHANGE, types.DEFAULT_ACTION_FAILURE]);
+    yield take([LOCATION_CHANGE, types.TOKEN_TRANSFER_FAILURE]);
     yield cancel(successWatcher);
 }
 
 // Individual exports for testing
 export default function* defaultSaga() {
-    yield takeLatest(types.DEFAULT_ACTION_REQUEST, defaultActionService);
+    yield takeLatest(types.TOKEN_TRANSFER_REQUEST, tokenTransferService);
 }

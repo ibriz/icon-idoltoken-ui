@@ -1,0 +1,22 @@
+
+
+
+.media img { float: left;}
+.media-content { overflow: hidden; padding-left:20px;}
+.media-content-text { padding-right: 280px}
+.clear { clear: both;}
+
+.getBtn { letter-spacing:2px; background:#333; color:#fff; float: right; border:none;
+    position: relative;     top: -15px; right:80px;
+    padding: 7px 15px;
+    border-radius: 2px;
+}
+
+.faded { font-size: 14px; color:#999 }
+.only-faded {
+    color:#999 !important;
+}
+.media { padding-bottom:10px; padding-top:10px;}
+.media h3 { margin:0;}
+
+.media:hover { background:#f0f0f0; }
