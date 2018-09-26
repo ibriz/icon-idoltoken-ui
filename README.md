@@ -8,3 +8,45 @@ During the first six months of commencement, we were focused on developing Nodeb
 **You can know more about bitsbeat and its family by exploring our website** :
 [bitsbeat.com](https://www.bitsbeat.com)
 
+
+## About IdolToken 
+For this demo application, there are three accounts created designed to demonstrate how NFT could be created and transfered from one account to another.  The token amount is a random ICX value assigned to the NFT. 
+
+**Note:** Go through JAVA API before running React App
+
+### JAVA API
+
+
+The webapp interacts with the APIs provided at
+> **https://github.com/ibriz/icon-idoltoken-api**
+
+
+### React App
+This is the frontend Reactjs app for IdolToken project.
+```sh
+$ git clone https://gitlab.com/bitsbeat/icon.git
+$ cd icon
+$ git branch
+$ npm install -d
+$ npm start
+
+# by default the application loads up at http://localhost:3000
+```
+
+### Libraries Used
+ - redux-saga
+
+## Internals 
+It has multiple pages that handles the workflow of Idol Tokens. 
+ - **Homepage for the IdolProject** ([../app/containers/IconPage][homepage])
+ - **Create Idol Token** ([../app/containers/CreateIconPage][create])
+ - **Idol Token Detail page** ([../app/containers/IconDetailPage][details])
+ - **My Wallet Page** ([../app/containers/MyWalletPage][mywallet])
+ - **Transfer Idol Token** ([../app/containers/TransferTokenPage][transfer])
+
+
+  [homepage]: <https://gitlab.com/bitsbeat/icon/tree/master/app/containers/IconPage>
+  [create]: <https://gitlab.com/bitsbeat/icon/tree/master/app/containers/CreateIconPage>
+  [details]: <https://gitlab.com/bitsbeat/icon/tree/master/app/containers/IconDetailPage>
+  [mywallet]: <https://gitlab.com/bitsbeat/icon/tree/master/app/containers/MyWalletPage>
+  [transfer]: <https://gitlab.com/bitsbeat/icon/tree/master/app/containers/TransferTokenPage>
