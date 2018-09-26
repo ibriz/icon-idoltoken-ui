@@ -1,4 +1,4 @@
-# About bitsbeat?
+# About bitsbeat
 
 The three close friends-turned colleagues’ passion towards technology gave birth to Bitsbeat. While working as software developers for one of the leading tech companies in Nepal we realized the limitless opportunities in technology and our combined capacity to ignite the tech revolution. The idea of initiating Bitsbeat was instantly born as we envisioned developing solutions to simplify lives, empower people and contribute to global economy by capitalizing emerging technologies. Our dedication, passion and hard work backed by risk-sharing ability led to the formation of a legal company.
 
