@@ -28,11 +28,11 @@ const initialState = fromJS({
   dialog: null,
   user: null,
   token: '',
-  currentAddress:'hx65f6e18d378b57612a28f72acb97021eaa82aa5a',
+  currentAddress:'hxe9d75191906ccc604fc1e45a9f3c59fb856c215f',
   addresses:[
-    "hx65f6e18d378b57612a28f72acb97021eaa82aa5a",
-    "hx2a7c46497d99e64d7198c267b5ca7deca265a4f8",
-    "hx40ebd13225ed28f7e98be3cd833ebe555cba72ca"
+    "hxe9d75191906ccc604fc1e45a9f3c59fb856c215f",
+    "hx266b582598ee78a12825831ac76200520c3a187d",
+    "hxda845aaf0c5829037324c8bbddc8da19ba026d03"
   ]
 });
 
