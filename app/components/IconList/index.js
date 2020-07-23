@@ -13,7 +13,6 @@ function IconList(props) {
 }
 
 const iconsList = (tokenList, goTo, images, height) => {
-  console.log('images',images);
 
   return (
       <Grid stackable doubling columns="4">

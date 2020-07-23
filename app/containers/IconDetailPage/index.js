@@ -84,7 +84,6 @@ export class IconDetailPage extends React.Component {
 
   renderCeleb = (item) => {
     const { tokenId, images } = this.state;
-    console.log('images',images);
 
       return (
         <div className="ui container text">

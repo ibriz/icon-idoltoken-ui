@@ -6,7 +6,7 @@ import defaultIcon from 'assets/default.jpg';
 
 import Link from "react-router-dom/Link"
 
-import { makeSelectAddresses } from '../../containers/App/selectors';
+import { makeSelectAddresses, makeSelectCurrentAddress } from '../../containers/App/selectors';
 import reducer from '../../containers/App/reducer';
 import { setCurrentAddress } from '../../containers/App/actions';
 
@@ -20,18 +20,22 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    currentAddress: ''
+  };
 
   setCurrentAddress = (address) => {
     this.props.setCurrentAddress(address);
   }
 
   render() {
-    const { addresses } = this.props;
+    const { addresses, currentAddress } = this.props;
     return (
       <header style={{ padding: '0 20px', borderBottom: '1px solid #eee' }}>
         <Link to="/"><img src={Icon} /></Link>
 
         <div style={{ float: 'right' }}>
+          <span style={{fontStyle:'italic', color: 'gray'}}>{currentAddress.slice(0,8) + " ... " + currentAddress.slice(-8,)}</span>
           <Dropdown style={{ padding: '20px 20px 0' }} text='Accounts'>
             <Dropdown.Menu>
               { addresses && addresses.map((item, index)=>{
@@ -69,7 +73,8 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  addresses : makeSelectAddresses()
+  addresses : makeSelectAddresses(),
+  currentAddress: makeSelectCurrentAddress(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
