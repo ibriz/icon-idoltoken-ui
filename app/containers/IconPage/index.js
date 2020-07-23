@@ -17,7 +17,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 
-import { Icon, Grid } from 'semantic-ui-react';
+import { Loader } from 'semantic-ui-react';
 import loader from 'assets/img/loader.svg';
 
 import {
@@ -111,7 +111,9 @@ export class IconPage extends React.Component {
         </Helmet>
 
         {isRequesting &&
-          <Icon src={loader} />
+          <div style={{display:'flex', margin: '50px', justifyContent:'center'}}>
+            <Loader active inline>Loading</Loader>
+          </div>
         }
         {!isRequesting &&
           <div style={{ textAlign: 'center' }}>
