@@ -35,8 +35,6 @@ import {
 } from './actions';
 import IconList from '../../components/IconList';
 import { goTo, fetchImageRequest } from '../App/actions';
-import MostPopular from './MostPopular';
-import RecentlyAdded from './RecentlyAdded';
 
 /* eslint-disable react/prefer-stateless-function */
 export class IconPage extends React.Component {
@@ -131,17 +129,6 @@ export class IconPage extends React.Component {
               images={images}
               height = '165px'
             />
-            <br />
-            <br />
-            <br />
-            <Grid columns="2">
-              <MostPopular
-                images={images}
-              />
-              <RecentlyAdded
-                images={images}
-                />
-            </Grid>
           </div>
         }
       </div>
